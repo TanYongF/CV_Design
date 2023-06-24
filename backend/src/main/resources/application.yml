@@ -21,3 +21,6 @@ mybatis-plus:
 
 
 
+pagehelper:
+  helperDialect: mysql
+  reasonable: true # 修改默认值

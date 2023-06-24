@@ -1,7 +1,10 @@
 package fun.tans.conf;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.baomidou.mybatisplus.core.incrementer.IKeyGenerator;
+import com.baomidou.mybatisplus.extension.incrementer.H2KeyGenerator;
 import org.apache.ibatis.reflection.MetaObject;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -42,6 +45,8 @@ public class MyMetaHandler implements MetaObjectHandler {
         long current = System.currentTimeMillis();
         this.setFieldValByName("updateAt", new Timestamp(current), metaObject);
     }
+
+
 
 
 }

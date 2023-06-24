@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 @SpringBootTest
-public class MysqlTest {
+public class MysqlUserTest {
 
     @Autowired
     private UserMapper userMapper;
@@ -31,7 +31,7 @@ public class MysqlTest {
     public void testInsert() {
         User user = new User();
         user.setUsername("tans");
-        user.setGender((byte) 1);
+        user.setGender(Boolean.TRUE);
         user.setPhone("16712866996");
         user.setPassword("tanyongfeng");
         user.setSalt("md555555");

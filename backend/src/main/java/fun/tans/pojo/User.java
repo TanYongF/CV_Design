@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("user")
+@TableName("cv_user")
 public class User {
     @TableId
     private String username;
