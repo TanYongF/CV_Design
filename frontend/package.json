@@ -1,0 +1,29 @@
+{
+  "name": "shop-store",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "@vueuse/core": "^10.1.2",
+    "@vueuse/integrations": "^10.1.2",
+    "axios": "^1.4.0",
+    "element-plus": "^2.3.5",
+    "nprogress": "^0.2.0",
+    "universal-cookie": "^4.0.4",
+    "vue": "^3.2.47",
+    "vue-router": "^4.2.1",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.1.0",
+    "vite": "^4.3.2",
+    "vite-plugin-windicss": "^1.9.0",
+    "windicss": "^3.5.6"
+  }
+}
