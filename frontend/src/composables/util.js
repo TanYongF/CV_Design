@@ -31,3 +31,8 @@ export function showFullLoading(){
 export function hideFullLoading(){
     nprogress.done()
 }
+
+
+export function transferDatestamp(date){
+    return new Date(date).toLocaleDateString();
+}
