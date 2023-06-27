@@ -21,6 +21,14 @@ mybatis-plus:
 
 
 
+aliyun:
+  endpoint: https://oss-accelerate.aliyuncs.com
+  accessKeyId: LTAI5tPAaPCbWZyBeLAxwCnh
+  accessKeySecret: 2RyCB4QAQqPwKg4yC1XB3aRHlaWc71
+  bucketName: kauizhaotan
+  targetPath: cv_design/resume/
+  targetUrl: https://kauizhaotan.oss-accelerate.aliyuncs.com #配置回传视频地址前缀
+
 pagehelper:
   helperDialect: mysql
   reasonable: true # 修改默认值

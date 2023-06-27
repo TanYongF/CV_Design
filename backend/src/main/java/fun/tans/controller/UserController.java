@@ -3,6 +3,7 @@ package fun.tans.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import fun.tans.annotation.NeedAuth;
 import fun.tans.pojo.User;
 import fun.tans.service.UserService;
@@ -25,12 +26,19 @@ public class UserController {
     @PostMapping("/register")
     public Result<User> register(@RequestParam("username") String username,
                                  @RequestParam("password") String password,
-                                 @RequestParam(value = "admin", required = false) Integer isAdmin) {
+                                 @RequestParam(value = "is_admin", required = false, defaultValue = "0") Integer isAdmin) {
         User user = new User(username, password);
         user.setRole(isAdmin == 1);
         userService.register(user);
         return Result.success(user);
     }
+
+
+    @GetMapping("/{user_id}")
+    public Result<User> getUserById(@PathVariable("user_id") String userId){
+        return Result.success(userService.getById(userId));
+    }
+
 
     /**
      * 根据特定条件查找用户
@@ -41,7 +49,6 @@ public class UserController {
      * @return 所有符合条件的用户
      */
     @GetMapping("")
-    @NeedAuth
     public Result<List<User>> getUser(@RequestParam(value = "username", required = false) String username,
                                 @RequestParam(value = "nickname", required = false) String nickname,
                                 @RequestParam(value = "gender",required = false) Boolean gender,
@@ -57,12 +64,25 @@ public class UserController {
         return Result.success(users);
     }
 
+    /**
+     * 登录接口
+     * @param username 用户名
+     * @param password 用户密码
+     * @return 用户实体
+     */
     @PostMapping("/login")
-    public Result<User> login(@RequestParam("username") String username,
+    public Result<String> login(@RequestParam("username") String username,
                               @RequestParam("password") String password) {
         User formUser = new User(username, password);
-        User user = userService.login(formUser);
-        return Result.success(user);
+        String token = userService.login(formUser);
+        return Result.success(token);
+    }
+
+
+    @GetMapping("/logout")
+    public Result<Boolean> logout(@RequestParam("token") String token){
+        userService.logout(token);
+        return Result.success(true);
     }
 
 
@@ -74,8 +94,8 @@ public class UserController {
      * @param phone    电话
      * @return 用户
      */
+
     @PutMapping("")
-    @NeedAuth
     public Result<User> update(@RequestParam("username") String username,
                                @RequestParam(value = "nickname", required = false) String nickname,
                                @RequestParam(value = "gender",required = false) Boolean gender,

@@ -15,6 +15,7 @@
     "axios": "^1.4.0",
     "element-plus": "^2.3.5",
     "nprogress": "^0.2.0",
+    "qs": "^6.11.2",
     "universal-cookie": "^4.0.4",
     "vue": "^3.2.47",
     "vue-router": "^4.2.1",

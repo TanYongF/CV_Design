@@ -1,17 +1,21 @@
 import axios from "axios";
-import { ElNotification } from 'element-plus'
+import { ElNotification } from 'element-plus';
+import qs from 'qs';
 import {
     getToken
 } from '~/composables/auth'
 import {toast} from '~/composables/util'
 const service = axios.create({
-    baseURL: "https://mock.apifox.cn/m1/2690748-0-default",
+    baseURL: "api",
     timeout: 1000,
 })
 
 // 添加请求拦截器
 service.interceptors.request.use(function (config) {
 
+    if(config.method == "post"){
+        config.data = qs.stringify(config.data);
+    }
     const token = getToken()
     if (token) config.headers["token"] = token
     return config;
@@ -33,6 +37,7 @@ service.interceptors.response.use(function (response) {
     }
     return response.data;
 }, function (error) {
+    console.log(error)
     toast(error.response.data, "warning")
     console.log(error)
     return Promise.reject(error);

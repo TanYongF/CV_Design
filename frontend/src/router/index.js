@@ -6,6 +6,7 @@ import Index from '~/pages/index.vue'
 import About from '~/pages/about.vue'
 import NotFound from '~/pages/404.vue'
 import Admin from "~/layout/admin.vue"
+import CV from '~/pages/cv/CV.vue'
 const routes = [{
     path: "/",
     component: Admin,
@@ -21,6 +22,12 @@ const routes = [{
         component: About,
         meta:{
             title: "关于"
+        }
+    },{
+        path: "/cvs",
+        component: CV,
+        meta: {
+            title: "简历管理"
         }
     }]
 

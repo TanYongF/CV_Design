@@ -2,7 +2,7 @@
     <div class="f-header">
         <span class="logo">
             <el-icon class="mr-1" @click="$router.push('/')"><eleme-filled /></el-icon>
-            短视频服务
+            简历分析系统
         </span>
         <el-icon class="icon-btn" @click="$store.commit('handleAsideWidth')">
             <Fold v-if = "$store.state.asideWidth == '250px'"/>
@@ -21,15 +21,15 @@
             <el-dropdown class="dropdown" @command="handleCommand">
                 <span class="el-dropdown-link flex items-center text-light-50">
                     <el-avatar class=" mr-2" :size="30"
-                        src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" />
-                    {{ $store.state.user.name }}
+                        :src="$store.state.user.avatar" />
+                    {{ $store.state.user.username }}
                     <el-icon class="el-icon--right">
                         <arrow-down />
                     </el-icon>
                 </span>
                 <template #dropdown>
                     <el-dropdown-menu>
-                        <el-dropdown-item command="about">个人信息</el-dropdown-item>
+                        <el-dropdown-item command="about">修改个人信息</el-dropdown-item>
                         <el-dropdown-item command="logout">注销登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </template>

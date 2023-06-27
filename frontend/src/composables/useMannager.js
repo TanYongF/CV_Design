@@ -31,3 +31,15 @@ export function useAbout(){
         handleAbout
     }
 }
+
+
+export function useCV(){
+    const router = useRouter();
+    const handleCV = ()=>{
+        router.push("/cvs");
+    }
+    return {
+        handleCV
+    }
+    
+}

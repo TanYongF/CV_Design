@@ -32,7 +32,6 @@ public class MyMetaHandler implements MetaObjectHandler {
         if (avatar == null) {
             this.setFieldValByName("avatar", "https://tdesign.gtimg.com/site/avatar.jpg", metaObject);
         }
-
     }
 
     /**

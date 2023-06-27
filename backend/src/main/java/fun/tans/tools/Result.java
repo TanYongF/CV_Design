@@ -24,7 +24,7 @@ public class Result<T> {
     private Result(BaseErrorInfoInterface errorInfo, T data) {
         this.code = Integer.parseInt(errorInfo.getResultCode());
         this.msg = errorInfo.getResultMsg();
-        if (data.getClass() != ExceptionEnum.class) this.data = data;
+        if (data != null && data.getClass() != ExceptionEnum.class) this.data = data;
     }
 
     /**

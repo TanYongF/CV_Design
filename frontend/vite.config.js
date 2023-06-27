@@ -12,4 +12,14 @@ export default defineConfig({
     }
   },
   plugins: [vue(),WindiCSS()],
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:8083",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 })
+

@@ -23,22 +23,54 @@ public class Resume {
      */
     private String fileName;
     /**
-     * 简历姓名
+     * 候选人姓名
      */
     private String name;
+    /**
+     * 最高学历
+     */
     private DegreeEnum highestDegree;
+    /**
+     * 手机电话
+     */
     private String tel;
+    /**
+     * 微信号
+     */
     private String wechat;
+    /**
+     * 邮箱
+     */
     private String email;
+    /**
+     * 年龄
+     */
     private Short age;
+    /**
+     * 毕业院校
+     */
     private String school;
+    /**
+     * 求职意向
+     */
     private String intention;
+    /**
+     * 性别
+     */
     private Boolean gender;
     /**
      * 简历照片地址
      */
     private String avatarUrl;
+    /**
+     * 工作年限
+     */
     private Short workingYears;
+
+    /**
+     * 上传用户名称
+     */
+    private String uploadUser;
 
 
     @TableField(fill = FieldFill.INSERT)

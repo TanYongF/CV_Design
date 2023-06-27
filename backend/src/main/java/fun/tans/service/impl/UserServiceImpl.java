@@ -1,6 +1,7 @@
 package fun.tans.service.impl;
 
 import cn.hutool.core.util.IdUtil;
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -9,6 +10,7 @@ import fun.tans.exception.BizException;
 import fun.tans.mapper.UserMapper;
 import fun.tans.pojo.User;
 import fun.tans.service.UserService;
+import fun.tans.tools.Result;
 import fun.tans.tools.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -43,7 +45,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public User login(User formUser) {
+    public String login(User formUser) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("username", formUser.getUsername());
         User dbUser = userMapper.selectOne(wrapper);
@@ -52,7 +54,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //todo: generate token to user
         String token = IdUtil.simpleUUID();
         redisTemplate.opsForValue().set(TOKEN_PREFIX + token, JSONUtil.toJsonStr(dbUser), 12, TimeUnit.HOURS);
-        return dbUser;
+        return token;
     }
 
     @Override
@@ -60,5 +62,20 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
         updateWrapper.lambda().eq(User::getUsername, user.getUsername());
         update(user,updateWrapper);
+    }
+
+    @Override
+    public void logout(String token) {
+        redisTemplate.delete(TOKEN_PREFIX + token);
+    }
+
+    @Override
+    public User getByToken(String token) {
+        Object o = redisTemplate.opsForValue().get(TOKEN_PREFIX + token);
+        if(o == null){
+            return null;
+        }else{
+            return JSONUtil.toBean((String) o, User.class);
+        }
     }
 }

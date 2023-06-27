@@ -4,7 +4,7 @@
       <el-col :lg="16" :md="12" class="left">
         <div>
           <div>您好</div>
-          <div>这里是登录界面</div>
+          <div>这里是简历分析网站</div>
         </div>
       </el-col>
       <el-col :lg="8" :md="12" class="right">
@@ -43,11 +43,9 @@
             <el-button round color="#626aef" class="w-[250px]" type="primary" @click="drawer = true">
               注 册
             </el-button>
-            <el-drawer v-model="drawer" size="100%" direction='btt'
+            <el-drawer v-model="drawer" size = '100%' direction='btt'
               :before-close="handleClose">
-              <template #header>
-                <h2></h2>
-              </template>
+
               <register></register>
             </el-drawer>
           </el-form-item>
@@ -59,7 +57,7 @@
 
 <script setup>
 import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
-import { login, getInfo } from "~/api/mannager";
+import { login, getUserById} from "~/api/mannager";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { toast } from '~/composables/util';
@@ -78,7 +76,7 @@ const form = reactive({
 const rules = {
   username: [
     { required: true, message: "用户名不能为空", trigger: "blur" },
-    { min: 3, max: 5, message: "用户名长度必须是3-5个字符", trigger: "blur" },
+    { min: 3, max: 20, message: "用户名长度必须是3-20个字符", trigger: "blur" },
   ],
   password: [
     {
@@ -104,11 +102,11 @@ const onSubmit = () => {
         toast("登录成功！")
         console.log(res);
         //存储token和用户相关信息
-        setToken(res.token)
+        setToken(res.data)
 
         //获取用户相关信息
-        getInfo(1).then(res2 => {
-          store.commit("SET_USERINFO", res2)
+        getUserById(form.username).then(res2 => {
+          store.commit("SET_USERINFO", res2.data)
         })
 
         //跳转到后台首页
@@ -121,7 +119,7 @@ const onSubmit = () => {
 }
 
 const handleClose = (done) => {
-  ElMessageBox.confirm('Are you sure you want to close this?')
+  ElMessageBox.confirm('确定要取消注册？')
     .then(() => {
       done()
     })
@@ -174,7 +172,7 @@ onBeforeUnmount(() => {
 }
 
 .left>div>div:last-child {
-  @apply text-gray-200 text-sm;
+  @apply text-gray-200 text-base;
 }
 
 .right .line {

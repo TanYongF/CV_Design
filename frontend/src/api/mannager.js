@@ -2,29 +2,24 @@ import { useCookies } from '@vueuse/integrations/useCookies';
 import axios from '~/axios';
 
 
-
 const cookie = useCookies()
 export function login(username, password){
-    return axios.post("/user/login",{},{
-        params:{
-            username: username,
-            password: password
-        }
+    return axios.post("/user/login", {
+        username: username,
+        password: password
     })
 }
  
+export function getUserById(user_id){
+    return axios.get("/user/"+ user_id, {})
+}
 
-export function getInfo(user_id){
-    return axios.get("/douyin/user/", {
-        params:{
-           user_id: user_id,
-           token: cookie.get("token")
-        }
-    })
+export function getInfoByToken(){
+    return axios.get("/getInfo", {})
 }
 
 export function logout(){
-    return axios.get("/douyin/user/logout", {
+    return axios.get("/user/logout", {
         params:{
             token: cookie.get("token")
         }
@@ -32,10 +27,19 @@ export function logout(){
 }
 
 export function register(user){
-    return axios.post('/douyin/user/register', {}, {
+    return axios.post('/user/register', {
+        username: user.username,
+        password: user.password,
+        is_admin: user.isAdmin == true ? 1 : 0
+    })
+    
+}
+
+export function getCvs(){
+    return axios.get('/cv', {
         params:{
-            username: user.username,
-            password: user.password
+            page_no : 1,
+            page_size: 1
         }
     })
 }

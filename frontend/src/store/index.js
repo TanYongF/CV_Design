@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
-import { login, getInfo } from "~/api/mannager";
-import {removeToken} from "~/composables/auth"
+import { login, getInfoByToken } from "~/api/mannager";
+import {removeToken, getToken} from "~/composables/auth"
 // 创建一个新的 store 实例
 const store = createStore({
     state () {
@@ -34,8 +34,8 @@ const store = createStore({
     actions: {
         getInfo({commit}){
             return new Promise((resolve, reject)=>{
-                getInfo(1).then(res=>{
-                    commit("SET_USERINFO", res.user)
+                getInfoByToken().then(res=>{
+                    commit("SET_USERINFO", res.data)
                     resolve(res)
                 }).catch(err=>reject(err))
             })
