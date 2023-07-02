@@ -1,6 +1,7 @@
 import router from '~/router'
 import { getToken } from '~/composables/auth'
 import { toast, showFullLoading, hideFullLoading } from '~/composables/util'
+
 import store from './store';
 // 全局前置守卫
 router.beforeEach(async (to, from, next) => {

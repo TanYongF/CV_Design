@@ -2,6 +2,7 @@ package fun.tans.pojo;
 
 import com.baomidou.mybatisplus.annotation.*;
 import fun.tans.enums.DegreeEnum;
+import fun.tans.enums.PoliticalAppearanceEnum;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -71,6 +72,21 @@ public class Resume {
      * 上传用户名称
      */
     private String uploadUser;
+
+    /**
+     * 自我评价
+     */
+    private String selfEvaluation;
+
+    /**
+     * 政治面貌
+     */
+    private PoliticalAppearanceEnum politicalAppearance;
+
+    /**
+     * 民族
+     */
+    private String ethnicity;
 
 
     @TableField(fill = FieldFill.INSERT)

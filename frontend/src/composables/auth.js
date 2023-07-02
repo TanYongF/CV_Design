@@ -2,6 +2,7 @@ import { useCookies } from "@vueuse/integrations/useCookies";
 
 
 const TokenKey = "token"
+const MaxExpireTime = 60 * 60 * 24
 const cookie = useCookies()
 
 
@@ -13,7 +14,9 @@ export function getToken(){
 
 //Set Token
 export function setToken(value){
-    return cookie.set(TokenKey, value)
+    return cookie.set(TokenKey, value, {
+        maxAge: MaxExpireTime
+    })
 }
 
 

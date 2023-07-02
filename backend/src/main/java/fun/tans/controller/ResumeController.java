@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import fun.tans.pojo.Resume;
+import fun.tans.pojo.User;
 import fun.tans.service.ResumeService;
 import fun.tans.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,9 +63,17 @@ public class ResumeController {
      * @return 简历解析结果
      */
     @PostMapping("/upload")
-    public Result<Resume> uploadCV(@RequestParam("file") MultipartFile file){
-        Resume cv = resumeService.store(file);
+    public Result<Resume> uploadCV(@RequestParam("file") MultipartFile file, User user){
+        Resume cv = resumeService.store(file, user);
         return Result.success(cv);
+    }
+
+    @PostMapping("/upload/v2")
+    public Result<Resume> uploadCV(@RequestParam(value = "file", required = false) MultipartFile file,
+                                   @RequestBody Resume resume,
+                                   User user){
+        Resume cv = resumeService.store(file, user, resume);
+        return Result.success(resume);
     }
 
     /**

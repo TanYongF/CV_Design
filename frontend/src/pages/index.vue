@@ -2,6 +2,7 @@
     <div class="segamentTitle">
         基本信息
     </div>
+    
     <el-row :gutter="15">
         <el-col :lg = "2" :md = "24">
             <div class="flex justify-center items-center"><el-avatar :size="100" :src=avatarUrl></el-avatar></div>

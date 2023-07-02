@@ -31,15 +31,25 @@ export function register(user){
         username: user.username,
         password: user.password,
         is_admin: user.isAdmin == true ? 1 : 0
-    })
-    
+    }) 
+}
+
+
+
+//以下是简历相关接口
+export function postCV(cv){
+    return axios.post('/cv/upload/v2',cv)
+}
+
+export function deleteCV(cvId){
+    return axios.delete('/cv/' + cvId, {})
 }
 
 export function getCvs(){
     return axios.get('/cv', {
         params:{
             page_no : 1,
-            page_size: 1
+            page_size:  6
         }
     })
 }

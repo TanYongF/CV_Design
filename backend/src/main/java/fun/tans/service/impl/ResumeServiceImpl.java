@@ -31,8 +31,9 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
     private ResumeMapper resumeMapper;
 
     @Override
-    public Resume store(MultipartFile file) {
+    public Resume store(MultipartFile file, User user) {
         Resume resume = new Resume();
+        resume.setUploadUser(user.getUsername());
         // Upload the file to the oss
         upload(file, resume);
         // Analysis the cv file, TODO
@@ -40,6 +41,15 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
         // Insert the record into the Mysql
 
         resumeMapper.insert(resume);
+        return resume;
+    }
+
+
+    @Override
+    public Resume store(MultipartFile file, User user, Resume resume) {
+        resume.setUploadUser(user.getUsername());
+        if(file != null) upload(file, resume);
+        saveOrUpdate(resume);
         return resume;
     }
 
@@ -67,7 +77,6 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
         //新生成文件名
         //简单使用
         String fileName = UUID.randomUUID().toString() + System.currentTimeMillis() + fileSuffix;
-
         try(InputStream fr = file.getInputStream()) {
             String savePath = aliyunConfig.getTargetPath() + fileName;
             ossClient.putObject(aliyunConfig.getBucketName(), savePath, fr);

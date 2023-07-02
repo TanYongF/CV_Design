@@ -32,19 +32,21 @@ public class RequestUtil {
         return null;
     }
 
+
     /**
-     * @param request 请求
-     * @return token
+     * 从请求中获取token 1.从cookie中获取 2.从header中获取
+     * @param request http请求对象
+     * @return
      */
     public static String getTokenByRequest(HttpServletRequest request) {
-        String paramToken = request.getParameter(UserService.COOKIE_NAME_TOKEN);
+        String headerToken = request.getHeader(UserService.COOKIE_NAME_TOKEN);
         String cookieToken = RequestUtil.getCookieValue(request, UserService.COOKIE_NAME_TOKEN);
 
         //token为空，那么该用户未登录，返回null
-        if (StringUtils.isEmpty(cookieToken) && StringUtils.isEmpty(paramToken)) {
+        if (StringUtils.isEmpty(cookieToken) && StringUtils.isEmpty(headerToken)) {
             return null;
         }
-        return StringUtils.isEmpty(paramToken) ? cookieToken : paramToken;
+        return StringUtils.isEmpty(headerToken) ? cookieToken : headerToken;
     }
 
 

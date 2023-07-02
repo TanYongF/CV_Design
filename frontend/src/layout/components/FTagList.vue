@@ -1,5 +1,5 @@
 <template>
-  <el-breadcrumb separator="/">
+  <el-breadcrumb separator="/" class="mb-5">
     <el-breadcrumb-item :to="{ path: '/' }">homepage</el-breadcrumb-item>
     <el-breadcrumb-item
       ><a href="/">promotion management</a></el-breadcrumb-item

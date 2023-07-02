@@ -1,35 +1,20 @@
 <template>
     <div class="sidebar" :style="{ width:$store.state.asideWidth }">
-        <el-menu router="true" :unique-opened="true" :default-active="defaultActive == '/about' ? '/' : defaultActive"  :collapse="$store.state.asideWidth == '64px'" :collapse-transition="false" class="el-menu-vertical-demo border-0">
+        <el-menu :router="true" :unique-opened="true" :default-active="defaultActive == '/about' ? '/' : defaultActive"  :collapse="$store.state.asideWidth == '64px'" :collapse-transition="false" class="el-menu-vertical-demo border-0">
             <el-menu-item index="/">
                 <el-icon><Odometer /></el-icon>
                 <span>首页</span>
             </el-menu-item>
-            <el-menu-item index = "/cvs">
-                        <el-icon>
-                            <notebook />
-                        </el-icon>
-                        <span>简历管理</span>
-            </el-menu-item>
-            <!-- <el-sub-menu index="/">
+            <el-sub-menu index="2">
                 <template #title>
                     <el-icon>
                         <notebook />
                     </el-icon>
                     <span>简历管理</span>
                 </template>
-                <el-menu-item-group title="Group One">
-                    <el-menu-item index="/test1-1">item one</el-menu-item>
-                    <el-menu-item index="/test1-2">item two</el-menu-item>
-                </el-menu-item-group>
-                <el-menu-item-group title="Group Two">
-                    <el-menu-item index="1-3">item three</el-menu-item>
-                </el-menu-item-group>
-                <el-sub-menu index="1-4">
-                    <template #title>item four</template>
-                    <el-menu-item index="1-4-1">item one</el-menu-item>
-                </el-sub-menu>
-            </el-sub-menu> -->
+                <el-menu-item index="/cvs">所有简历</el-menu-item>
+                <el-menu-item index="/cv/add">上传简历</el-menu-item>
+            </el-sub-menu>
             <el-menu-item index="/jobs">
                 <el-icon><house /></el-icon>
                 <span>岗位管理</span>

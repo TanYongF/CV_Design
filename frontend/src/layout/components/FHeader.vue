@@ -1,7 +1,7 @@
 <template>
     <div class="f-header">
         <span class="logo">
-            <el-icon class="mr-1" @click="$router.push('/')"><eleme-filled /></el-icon>
+            <el-icon class="mr-2" @click="$router.push('/')"><eleme-filled /></el-icon>
             简历分析系统
         </span>
         <el-icon class="icon-btn" @click="$store.commit('handleAsideWidth')">
@@ -75,14 +75,16 @@ const refresh = ()=>{
 
 </script>
 <style scoped>
+@import '~/assets/fonts/fonts.css';
 .f-header {
-    @apply flex items-center bg-indigo-600 text-light-50 fixed top-0 right-0 left-0;
+    @apply flex items-center z-1 bg-indigo-600 text-light-50 fixed top-0 right-0 left-0;
     height: 64px;
 }
 
 .logo {
     width: 250px;
     @apply flex justify-center items-center text-xl font-thin;
+    font-family: 'JDGY'
 }
 
 .icon-btn {

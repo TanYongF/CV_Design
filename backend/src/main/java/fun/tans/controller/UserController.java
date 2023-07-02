@@ -10,6 +10,7 @@ import fun.tans.service.UserService;
 import fun.tans.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -107,5 +108,13 @@ public class UserController {
         user.setPhone(phone);
         userService.update(user);
         return Result.success(user);
+    }
+
+
+    @PostMapping("/avatar")
+    public Result<String> uploadAvatar(@RequestParam("file") MultipartFile file){{
+        return Result.success(userService.uploadAvatar(file));
+    }
+
     }
 }

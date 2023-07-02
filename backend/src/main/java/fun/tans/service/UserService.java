@@ -4,6 +4,7 @@ package fun.tans.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import fun.tans.pojo.User;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public interface UserService extends IService<User> {
@@ -21,4 +22,6 @@ public interface UserService extends IService<User> {
     void logout(String token);
 
     User getByToken(String token);
+
+    String uploadAvatar(MultipartFile file);
 }
