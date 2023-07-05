@@ -2,9 +2,6 @@ package fun.tans.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import fun.tans.annotation.NeedAuth;
 import fun.tans.pojo.User;
 import fun.tans.service.UserService;
 import fun.tans.tools.Result;
@@ -36,13 +33,14 @@ public class UserController {
 
 
     @GetMapping("/{user_id}")
-    public Result<User> getUserById(@PathVariable("user_id") String userId){
+    public Result<User> getUserById(@PathVariable("user_id") String userId) {
         return Result.success(userService.getById(userId));
     }
 
 
     /**
      * 根据特定条件查找用户
+     *
      * @param username 用户名
      * @param nickname 用户昵称
      * @param gender   用户性别
@@ -51,9 +49,9 @@ public class UserController {
      */
     @GetMapping("")
     public Result<List<User>> getUser(@RequestParam(value = "username", required = false) String username,
-                                @RequestParam(value = "nickname", required = false) String nickname,
-                                @RequestParam(value = "gender",required = false) Boolean gender,
-                                @RequestParam(value = "phone",required = false) String phone) {
+                                      @RequestParam(value = "nickname", required = false) String nickname,
+                                      @RequestParam(value = "gender", required = false) Boolean gender,
+                                      @RequestParam(value = "phone", required = false) String phone) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         Map<String, Object> map = new HashMap<>();
         map.put("username", username);
@@ -67,13 +65,14 @@ public class UserController {
 
     /**
      * 登录接口
+     *
      * @param username 用户名
      * @param password 用户密码
      * @return 用户实体
      */
     @PostMapping("/login")
     public Result<String> login(@RequestParam("username") String username,
-                              @RequestParam("password") String password) {
+                                @RequestParam("password") String password) {
         User formUser = new User(username, password);
         String token = userService.login(formUser);
         return Result.success(token);
@@ -81,7 +80,7 @@ public class UserController {
 
 
     @GetMapping("/logout")
-    public Result<Boolean> logout(@RequestParam("token") String token){
+    public Result<Boolean> logout(@RequestParam("token") String token) {
         userService.logout(token);
         return Result.success(true);
     }
@@ -89,18 +88,18 @@ public class UserController {
 
     /**
      * update the user's info
+     *
      * @param username 用户名
      * @param nickname 昵称
      * @param gender   年龄
      * @param phone    电话
      * @return 用户
      */
-
     @PutMapping("")
     public Result<User> update(@RequestParam("username") String username,
                                @RequestParam(value = "nickname", required = false) String nickname,
-                               @RequestParam(value = "gender",required = false) Boolean gender,
-                               @RequestParam(value = "phone",required = false) String phone){
+                               @RequestParam(value = "gender", required = false) Boolean gender,
+                               @RequestParam(value = "phone", required = false) String phone) {
         User user = new User();
         user.setUsername(username);
         user.setNickname(nickname);
@@ -112,9 +111,8 @@ public class UserController {
 
 
     @PostMapping("/avatar")
-    public Result<String> uploadAvatar(@RequestParam("file") MultipartFile file){{
+    public Result<String> uploadAvatar(@RequestParam("file") MultipartFile file) {
         return Result.success(userService.uploadAvatar(file));
     }
 
-    }
 }

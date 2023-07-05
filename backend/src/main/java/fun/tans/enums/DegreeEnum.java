@@ -26,4 +26,8 @@ public enum DegreeEnum {
         this.code = code;
         this.descp = descp;
     }
+
+    public int getCode() {
+        return this.code;
+    }
 }

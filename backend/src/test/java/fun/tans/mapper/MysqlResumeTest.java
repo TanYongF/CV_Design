@@ -32,22 +32,25 @@ public class MysqlResumeTest {
 
     @Test
     public void testInsert() {
-        Resume resume = new Resume();
-        resume.setFileUrl("https://tans.fun");
-        resume.setFileName("101.pdf");
-        resume.setName("tan yongfeng");
-        resume.setHighestDegree(DegreeEnum.Doctor);
-        resume.setTel("12345678910");
-        resume.setWechat("tan13621251388132");
-        resume.setEmail("tan13621251388@gmail.com");
-        resume.setAge((short) 21);
-        resume.setSchool("南京邮电大学");
-        resume.setIntention("后端开发工程师");
-        resume.setGender(Boolean.TRUE);
-        resume.setAvatarUrl("https://tans.fun/avatar");
-        resume.setWorkingYears((short) 3);
-        resumeService.save(resume);
-        Assertions.assertNotNull(resume.getCreateAt());
+        for(int i = 0; i < 100; i++){
+            Resume resume = new Resume();
+            resume.setFileUrl("https://tans.fun");
+            resume.setFileName("101.pdf");
+            resume.setName("tan yongfeng");
+            resume.setHighestDegree(DegreeEnum.Doctor);
+            resume.setTel("12345678910");
+            resume.setWechat("tan13621251388132");
+            resume.setEmail("tan13621251388@gmail.com");
+            resume.setAge((short) 21);
+            resume.setSchool("南京邮电大学");
+            resume.setIntention("后端开发工程师");
+            resume.setGender(Boolean.TRUE);
+            resume.setAvatarUrl("https://tans.fun/avatar");
+            resume.setWorkingYears((short) 3);
+            resumeService.save(resume);
+            Assertions.assertNotNull(resume.getCreateAt());
+        }
+
     }
 
 }

@@ -15,7 +15,7 @@ public class CommonController {
     private UserService userService;
 
     @GetMapping("/getInfo")
-    public Result<User> getInfo(@RequestHeader("token") String token){
+    public Result<User> getInfo(@RequestHeader("token") String token) {
         User user = userService.getByToken(token);
         return Result.success(user);
     }

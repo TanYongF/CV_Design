@@ -21,7 +21,7 @@ public class RequestUtil {
      */
     public static String getCookieValue(HttpServletRequest request, String cookieName) {
         Cookie[] cookies = request.getCookies();
-        if (cookies == null || cookies.length <= 0) {
+        if (cookies == null) {
             return null;
         }
         for (Cookie cookie : cookies) {
@@ -35,6 +35,7 @@ public class RequestUtil {
 
     /**
      * 从请求中获取token 1.从cookie中获取 2.从header中获取
+     *
      * @param request http请求对象
      * @return
      */

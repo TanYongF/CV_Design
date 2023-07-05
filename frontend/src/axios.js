@@ -14,7 +14,7 @@ const service = axios.create({
 service.interceptors.request.use(function (config) {
 
     if(config.method == "post"){
-        config.data = qs.stringify(config.data);
+        if(config.url == '/user/login' || config.url == '/user/register')config.data = qs.stringify(config.data);
     }
     const token = getToken()
     if (token) config.headers["token"] = token

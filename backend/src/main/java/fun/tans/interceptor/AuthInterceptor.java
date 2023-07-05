@@ -21,8 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author tyf
  * @description 在参数解析器解析完成user对象之前，会对token进行前置判别，
- *  * 如果为空或者Session不存在当前token，那么就会返回未登陆信息。
- *  * 如果不为空，那么对该请求直接放行
+ * * 如果为空或者Session不存在当前token，那么就会返回未登陆信息。
+ * * 如果不为空，那么对该请求直接放行
  * @date 23:31 2023/6/12
  **/
 @Component
@@ -34,7 +34,7 @@ public class AuthInterceptor implements HandlerInterceptor {
     private UserService userService;
 
     @Autowired
-    private RedisTemplate<String,Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

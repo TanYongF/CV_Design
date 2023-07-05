@@ -13,7 +13,7 @@ public class SecurityUtil {
             if (j >= 0) sb.append(message.charAt(j--));
             else break;
         }
-        System.out.println(sb.toString());
+        System.out.println(sb);
         return md5.digestHex(sb.toString());
     }
 }

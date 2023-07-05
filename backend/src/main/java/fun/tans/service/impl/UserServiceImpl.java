@@ -1,20 +1,16 @@
 package fun.tans.service.impl;
 
 import cn.hutool.core.util.IdUtil;
-import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.aliyun.oss.OSS;
-import com.aliyun.oss.OSSClient;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import fun.tans.conf.AliyunConfig;
 import fun.tans.exception.BizException;
 import fun.tans.mapper.UserMapper;
-import fun.tans.pojo.Resume;
 import fun.tans.pojo.User;
 import fun.tans.service.UserService;
-import fun.tans.tools.Result;
 import fun.tans.tools.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -75,7 +71,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public void update(User user) {
         UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
         updateWrapper.lambda().eq(User::getUsername, user.getUsername());
-        update(user,updateWrapper);
+        update(user, updateWrapper);
     }
 
     @Override
@@ -86,9 +82,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public User getByToken(String token) {
         Object o = redisTemplate.opsForValue().get(TOKEN_PREFIX + token);
-        if(o == null){
+        if (o == null) {
             return null;
-        }else{
+        } else {
             return JSONUtil.toBean((String) o, User.class);
         }
     }
@@ -102,7 +98,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //简单使用
         String fileName = UUID.randomUUID().toString() + System.currentTimeMillis() + fileSuffix;
         String targetPath;
-        try(InputStream fr = file.getInputStream()) {
+        try (InputStream fr = file.getInputStream()) {
             String savePath = aliyunConfig.getTargetPath() + fileName;
             ossClient.putObject(aliyunConfig.getBucketName(), savePath, fr);
             targetPath = aliyunConfig.getTargetUrl() + "/" + savePath;

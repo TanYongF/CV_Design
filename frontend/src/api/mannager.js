@@ -53,3 +53,25 @@ export function getCvs(){
         }
     })
 }
+
+//以下是关于工作相关的接口
+export function getJobs(){
+    return axios.get('/job')
+}
+export function getJob(job_id){
+    return axios.get('/job/'+ job_id)
+}
+export function postJob(job){
+    return axios.get('/job', job)
+}
+export function deleteJob(job_id){
+    return axios.delete('/job/' + job_id);
+}
+export function searchJob(job, pageSize, pageNum){
+    return axios.post('/job/search', job, {
+        params:{
+            page_no : pageNum,
+            page_size: pageSize
+        }
+    } )
+}

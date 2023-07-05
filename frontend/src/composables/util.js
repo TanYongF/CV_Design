@@ -33,6 +33,11 @@ export function hideFullLoading(){
 }
 
 
+/**
+ * 将Timestamp格式日期转化为易读格式输出
+ * @param {Data} date 
+ * @returns 
+ */
 export function transferDatestamp(date){
-    return new Date(date).toLocaleDateString();
+    return new Date(date).toLocaleDateString("zh-CN");
 }
