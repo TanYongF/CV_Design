@@ -1,5 +1,5 @@
 <template>
-    <div class="segamentTitle">
+    <div class="detail-title ">
         基本信息
     </div>
     
@@ -7,7 +7,8 @@
         <el-col :lg = "2" :md = "24">
             <div class="flex justify-center items-center"><el-avatar :size="100" :src=avatarUrl></el-avatar></div>
         </el-col>
-        <el-col :lg = "22" :md = "24">
+
+        <el-col :lg = "20" :md = "24">
             <el-descriptions>
                 <el-descriptions-item label="用户名">{{ $store.state.user.username }}</el-descriptions-item>
                 <el-descriptions-item label="手机号"> {{ $store.state.user.phone }}</el-descriptions-item>
@@ -18,7 +19,13 @@
                 <el-tag size="small">学校</el-tag>
                 </el-descriptions-item>
                 <el-descriptions-item label="联系地址">江苏省苏州市吴中区吴中大道 1188 号</el-descriptions-item>
+                <el-descriptions-item label="身份"> {{ $store.state.user.role == 1 ? '企业用户' : '普通用户' }}</el-descriptions-item>
+                <el-descriptions-item label="">
+                    <a class="text-blue-500">修改个人信息</a>
+                </el-descriptions-item> 
             </el-descriptions>
+
+
         </el-col>
 
     
@@ -26,7 +33,7 @@
 
 
     <!--  简历分析开始  -->
-    <div class="segamentTitle">
+    <div class="detail-title ">
         简历分析
     </div>
     <el-row :gutter = "15">
@@ -57,7 +64,7 @@
     </el-row>
 
 
-    <div class="segamentTitle">
+    <div class="detail-title ">
         用户标签
     </div>
     <el-row>
@@ -71,7 +78,7 @@
     </el-row>
 
 
-    <div class="segamentTitle">
+    <div class="detail-title ">
         行业竞争力
     </div>
     <el-row>
