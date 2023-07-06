@@ -3,75 +3,83 @@ import axios from '~/axios';
 
 
 const cookie = useCookies()
-export function login(username, password){
+export function login(username, password) {
     return axios.post("/user/login", {
         username: username,
         password: password
     })
 }
- 
-export function getUserById(user_id){
-    return axios.get("/user/"+ user_id, {})
+
+export function getUserById(user_id) {
+    return axios.get("/user/" + user_id, {})
 }
 
-export function getInfoByToken(){
+export function getInfoByToken() {
     return axios.get("/getInfo", {})
 }
 
-export function logout(){
+export function logout() {
     return axios.get("/user/logout", {
-        params:{
+        params: {
             token: cookie.get("token")
         }
     })
 }
 
-export function register(user){
+export function register(user) {
     return axios.post('/user/register', {
         username: user.username,
         password: user.password,
         is_admin: user.isAdmin == true ? 1 : 0
-    }) 
+    })
 }
 
 
 
 //以下是简历相关接口
-export function postCV(cv){
-    return axios.post('/cv/upload/v2',cv)
+export function postCV(cv) {
+    return axios.post('/cv/upload/v2', cv)
 }
 
-export function deleteCV(cvId){
+export function deleteCV(cvId) {
     return axios.delete('/cv/' + cvId, {})
 }
 
-export function getCvs(){
+export function getCvs() {
     return axios.get('/cv', {
-        params:{
-            page_no : 1,
-            page_size:  6
+        params: {
+            page_no: 1,
+            page_size: 6
         }
     })
 }
 
 //以下是关于工作相关的接口
-export function getJobs(){
+export function getJobs() {
     return axios.get('/job')
 }
-export function getJob(job_id){
-    return axios.get('/job/'+ job_id)
+export function getJob(job_id) {
+    return axios.get('/job/' + job_id)
 }
-export function postJob(job){
-    return axios.get('/job', job)
+export function postJob(job) {
+    return axios.post('/job', job)
 }
-export function deleteJob(job_id){
+export function deleteJob(job_id) {
     return axios.delete('/job/' + job_id);
 }
-export function searchJob(job, pageSize, pageNum){
+export function searchJob(job, pageSize, pageNum) {
     return axios.post('/job/search', job, {
-        params:{
-            page_no : pageNum,
+        params: {
+            page_no: pageNum,
             page_size: pageSize
         }
-    } )
+    })
+}
+export function proposeJob(jobId, pageSize, pageNo) {
+    return axios.get('/job/propose/' + jobId, {
+        params: {
+            page_no: pageNo,
+            page_size: pageSize
+        }
+    })
 }

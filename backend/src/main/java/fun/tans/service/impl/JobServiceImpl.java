@@ -28,8 +28,10 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
         QueryWrapper<Job> wrapper = new QueryWrapper<>();
         wrapper.like("position_name", params.getOrDefault("positionName", "%"))
                 .like("company_name", params.getOrDefault("companyName", "%"))
-                .ge("min_salary", params.getOrDefault("minSalary", 0));
+                .ge("min_salary", params.getOrDefault("minSalary", 0))
+                .ge("min_work_years", params.getOrDefault("minWorkYears", 0));
         if (params.containsKey("userName")) wrapper.eq("user_name", params.get("userName"));
+        wrapper.orderByDesc("update_at");
         return jobMapper.selectPage(page, wrapper);
     }
 
@@ -39,6 +41,7 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, Job> implements JobSe
         QueryWrapper<Resume> wrapper = new QueryWrapper<>();
         wrapper.le("highest_degree", job.getMinDegree() == null ? 100 : job.getMinDegree().getCode())
                 .ge("working_years", job.getMinWorkYears() == null ? -1 : job.getMinWorkYears());
+
         return resumeMapper.selectPage(resumePage, wrapper);
     }
 }

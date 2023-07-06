@@ -12,10 +12,13 @@ import java.sql.Timestamp;
 @TableName("cv_job")
 @AllArgsConstructor
 public class Job {
+
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    private String id;
     /**
      * 最低薪酬
      */
-    public Integer minSalary;
+    private Integer minSalary;
     /**
      * 其他信息
      */
@@ -23,17 +26,17 @@ public class Job {
     /**
      * 上传企业
      */
-    public String userName;
+    private String userName;
     /**
      * 最低学历
      */
-    public DegreeEnum minDegree;
+    private DegreeEnum minDegree;
     /**
      * 最低工作年限
      */
-    public Integer minWorkYears;
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private String id;
+    private Integer minWorkYears;
+
+
     /**
      * 公司名称
      */

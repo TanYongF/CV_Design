@@ -7,7 +7,7 @@
             <el-aside :width="$store.state.asideWidth">
                 <f-menu></f-menu>
             </el-aside>
-            <el-main>
+            <el-main class="z-0">
                 <f-tag-list></f-tag-list>
                 <router-view></router-view>
             </el-main>

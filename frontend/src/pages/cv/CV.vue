@@ -37,7 +37,7 @@ import {onMounted, ref, reactive} from 'vue'
 import {getCvs} from '~/api/mannager'
 import resumeCard from '~/components/cv/resumeCard.vue'
 
-const loading = ref(false)
+const loading = ref(true)
 
 const cvss = reactive({
     records: [],

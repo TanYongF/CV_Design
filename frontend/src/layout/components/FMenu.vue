@@ -15,15 +15,20 @@
                 <el-menu-item index="/cvs">所有简历</el-menu-item>
                 <el-menu-item index="/cv/add">上传简历</el-menu-item>
             </el-sub-menu>
-            <el-menu-item index="/jobs">
-                <el-icon><house /></el-icon>
-                <span>岗位管理</span>
-            </el-menu-item>
-            <el-menu-item index="/peoples">
+            <el-sub-menu index="3">
+                <template #title>
+                    <el-icon><house /></el-icon>
+                    <span>岗位管理</span>
+                </template>
+                <el-menu-item index="/job">所有岗位</el-menu-item>
+                <el-menu-item index="/job/my">我的发布</el-menu-item>
+            </el-sub-menu>
+
+            <el-menu-item index="/peoples"  v-if="$store.state.user.role == 1" >
                 <el-icon><Avatar /></el-icon>
                 <span>人才匹配</span>
             </el-menu-item>
-            <el-menu-item index="/tags">
+            <el-menu-item index="/tags"  v-if="$store.state.user.role == 1">
                 <el-icon><CollectionTag /></el-icon>
                 <span>标签管理</span>
             </el-menu-item>

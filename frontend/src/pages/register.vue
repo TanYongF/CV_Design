@@ -31,7 +31,7 @@
                                 </template>
                             </el-input>
                         </el-form-item>
-                        <el-form-item label="是否注册为管理员">
+                        <el-form-item label="是否注册为企业用户">
                             <el-switch  v-model="formLabelAlign.isAdmin"></el-switch>
                         </el-form-item>
                         <el-form-item>

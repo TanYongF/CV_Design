@@ -6,7 +6,7 @@ package fun.tans.exception;
  * @description 异常处理枚举类
  * @date 18:27 2023/6/12
  **/
-public enum ExceptionEnum implements BaseErrorInfoInterface {
+public enum ExceptionEnum  implements BaseErrorInfoInterface {
 
     // 数据操作错误定义
     SUCCESS("0", "成功!"),
@@ -14,8 +14,8 @@ public enum ExceptionEnum implements BaseErrorInfoInterface {
     SIGNATURE_NOT_MATCH("4001", "请求的数字签名不匹配!"),
     NOT_FOUND("4004", "未找到该资源!"),
     INTERNAL_SERVER_ERROR("5000", "服务器内部错误!"),
-    SERVER_BUSY("5003", "服务器正忙，请稍后再试!");
-
+    SERVER_BUSY("5003", "服务器正忙，请稍后再试!"),
+    AUTH_ERROR("5001", "用户未登录！");
     /**
      * 错误码
      */

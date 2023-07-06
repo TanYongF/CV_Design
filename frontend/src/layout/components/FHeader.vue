@@ -2,7 +2,8 @@
     <div class="f-header">
         <span class="logo">
             <el-icon class="mr-2" @click="$router.push('/')"><eleme-filled /></el-icon>
-            简历分析系统
+            简历分析系统  <span v-if="$store.state.user.role == 1">-企业端</span>
+            
         </span>
         <el-icon class="icon-btn" @click="$store.commit('handleAsideWidth')">
             <Fold v-if = "$store.state.asideWidth == '250px'"/>
@@ -22,7 +23,8 @@
                 <span class="el-dropdown-link flex items-center text-light-50">
                     <el-avatar class=" mr-2" :size="30"
                         :src="$store.state.user.avatar" />
-                    {{ $store.state.user.username }}
+                    {{ $store.state.user.username }} 
+                  
                     <el-icon class="el-icon--right">
                         <arrow-down />
                     </el-icon>

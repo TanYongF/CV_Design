@@ -3,6 +3,7 @@ package fun.tans.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import fun.tans.pojo.Job;
 import fun.tans.pojo.Resume;
+import fun.tans.pojo.User;
 import fun.tans.service.JobService;
 import fun.tans.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,9 @@ public class JobController {
      * @return the new jobs
      */
     @PostMapping("")
-    public Result<Job> saveJob(@RequestBody Job job) {
+    public Result<Job> saveJob(@RequestBody Job job, User user) {
         job.setId("");
+        job.setUserName(user.getUsername());
         jobService.saveOrUpdate(job);
         return Result.success(job);
     }
@@ -54,7 +56,6 @@ public class JobController {
         return Result.success(filterJobs);
     }
 
-
     /**
      * 根据岗位条件推荐候选人
      *
@@ -67,4 +68,6 @@ public class JobController {
                                           @PathVariable("jobId") String jobId) {
         return Result.success(jobService.recommend(jobId, new Page<>(pageNo, pageSize)));
     }
+
+
 }

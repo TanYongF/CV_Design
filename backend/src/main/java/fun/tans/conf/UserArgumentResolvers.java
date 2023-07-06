@@ -1,5 +1,6 @@
 package fun.tans.conf;
 
+import fun.tans.exception.ExceptionEnum;
 import fun.tans.pojo.User;
 import fun.tans.service.UserService;
 import fun.tans.tools.RequestUtil;
@@ -27,7 +28,7 @@ public class UserArgumentResolvers implements HandlerMethodArgumentResolver {
     }
 
     @Override
-    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory)  {
         HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
         assert request != null;
         String token = RequestUtil.getTokenByRequest(request);
