@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <el-form inline :model="searchCondition"  :default-sort="{ prop: 'updateAt', order: 'descending' }">
+        <el-form inline :model="searchCondition" :default-sort="{ prop: 'updateAt', order: 'descending' }">
             <el-form-item label="公司名称">
                 <el-input placeholder="任意公司" v-model="searchCondition.companyName"></el-input>
             </el-form-item>
@@ -24,7 +24,7 @@
             :default-sort="{ prop: 'minSalary', order: 'descending' }">
             <el-table-column prop="id" label="岗位编号" width="200"></el-table-column>
             <el-table-column prop="headCount" label="招聘人数" width="100"></el-table-column>
-            <el-table-column prop="positionName" label="岗位名称" width="150"></el-table-column>
+            <el-table-column prop="positionName" label="岗位名称" width=""></el-table-column>
             <el-table-column sortable prop="minSalary" label="最低工资" width="150"></el-table-column>
             <el-table-column sortable prop="maxSalary" label="最高工资" width="150"></el-table-column>
             <el-table-column sortable prop="updateAt" label="更新时间" :formatter="UpdateTimeFormatter"> </el-table-column>
@@ -50,20 +50,20 @@
         </template>
         <div class="rounded-3xl p-4 form-bg mx-4">
             <!-- <CVForm :cv=newCV.cv :showButton="false"></CVForm> -->
-            <jobForm></jobForm>
+            <jobForm :dialogVisible = "dialogVisible"></jobForm>
         </div>
     </el-dialog>
     <!-- 更改表单开始 -->
     <el-dialog v-model="dialogUpdateVisible" title="岗位查看" width="45%" :before-close="handleClose" @open="onOpen"
-    class="dialog-bg">
-    <template #header>
-        <div style="font-family: 'JMH'; padding-bottom: 0px;" class="text-2xl">岗位新增</div>
-    </template>
-    <div class="rounded-3xl p-4 form-bg mx-4">
-        <!-- <CVForm :cv=newCV.cv :showButton="false"></CVForm> -->
-        <jobForm></jobForm>
-    </div>
-</el-dialog>
+        class="dialog-bg">
+        <template #header>
+            <div style="font-family: 'JMH'; padding-bottom: 0px;" class="text-2xl">岗位新增</div>
+        </template>
+        <div class="rounded-3xl p-4 form-bg mx-4">
+            <!-- <CVForm :cv=newCV.cv :showButton="false"></CVForm> -->
+            <jobForm></jobForm>
+        </div>
+    </el-dialog>
 </template>
 
 

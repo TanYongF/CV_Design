@@ -7,6 +7,7 @@ import fun.tans.mapper.ResumeMapper;
 import fun.tans.pojo.Resume;
 import fun.tans.pojo.User;
 import fun.tans.service.ResumeService;
+import fun.tans.tools.TrieNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +28,9 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
     @Autowired
     private ResumeMapper resumeMapper;
 
+    @Autowired
+    private TrieNode tagSearchTrie;
+
     @Override
     public Resume store(MultipartFile file, User user) {
         Resume resume = new Resume();
@@ -36,7 +40,6 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
         // Analysis the cv file, TODO
 
         // Insert the record into the Mysql
-
         resumeMapper.insert(resume);
         return resume;
     }

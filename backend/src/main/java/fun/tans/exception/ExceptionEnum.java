@@ -6,7 +6,7 @@ package fun.tans.exception;
  * @description 异常处理枚举类
  * @date 18:27 2023/6/12
  **/
-public enum ExceptionEnum  implements BaseErrorInfoInterface {
+public enum ExceptionEnum implements BaseErrorInfoInterface {
 
     // 数据操作错误定义
     SUCCESS("0", "成功!"),

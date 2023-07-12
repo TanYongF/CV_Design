@@ -56,7 +56,7 @@ import { ref, reactive } from 'vue'
 import { toast } from '~/composables/util.js'
 import { postJob } from '~/api/mannager'
 import { useRouter } from "vue-router";
-
+const props = defineProps(['dialogVisible'])
 const job = reactive({
     "id": "",
     "companyName": "",
@@ -68,7 +68,7 @@ const job = reactive({
     "remark": "",
     "createAt": "",
     "updateAt": "",
-    "minDegree": "",
+    "minDegree": "8",
     "minWorkYears": "",
     "userName": "",
 })
@@ -76,10 +76,10 @@ const loading = ref(false)
 
 const onSubmit = ()=>{
     loading.value = true;
-    postJob(job).then(()=>{
-        
+    postJob(job).then((res)=>{
+        toast(res.msg)
     }).finally(()=>{
-        toast("添加成功！")
+        // location.reload()
         loading.value = false
     })
 }

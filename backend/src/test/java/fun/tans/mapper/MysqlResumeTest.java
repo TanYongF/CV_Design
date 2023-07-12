@@ -2,9 +2,7 @@ package fun.tans.mapper;
 
 import fun.tans.enums.DegreeEnum;
 import fun.tans.pojo.Resume;
-import fun.tans.pojo.User;
 import fun.tans.service.ResumeService;
-import fun.tans.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +30,7 @@ public class MysqlResumeTest {
 
     @Test
     public void testInsert() {
-        for(int i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++) {
             Resume resume = new Resume();
             resume.setFileUrl("https://tans.fun");
             resume.setFileName("101.pdf");

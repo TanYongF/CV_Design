@@ -16,7 +16,7 @@
         </div>
         <el-form :model="form" :rules="rules" ref="formRef" class="w-[250px]">
           <el-form-item prop="username">
-            <el-input v-model="form.username" placeholder="输入用户名" type="password" show-password>
+            <el-input v-model="form.username" placeholder="输入用户名" >
               <template #prefix>
                 <el-icon class="el-input__icon">
                   <User />
@@ -26,7 +26,7 @@
           </el-form-item>
 
           <el-form-item prop="password">
-            <el-input v-model="form.password" placeholder="输入密码">
+            <el-input v-model="form.password" placeholder="输入密码" type="password" show-password>
               <template #prefix>
                 <el-icon class="el-input__icon">
                   <Key />
@@ -92,7 +92,7 @@ const loading = ref(false);
 
 const onSubmit = () => {
   formRef.value.validate((valid) => {
-    console.log("校验通过");
+
     if (!valid) {
       return false;
     }
@@ -153,7 +153,7 @@ onBeforeUnmount(() => {
 </script>
 
 
-<style>
+<style scoped>
 .login-container {
   @apply bg-indigo-500 min-h-screen;
 }

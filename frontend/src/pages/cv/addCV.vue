@@ -1,14 +1,18 @@
 <template>
+    <div v-loading="loading" element-loading-text="正在解析，请稍后...">
     <el-upload
         class="upload-demo"
         drag
         :multiple="false"
-        action="/api/cv/upload"
+        action="/ai/ai/analysis/"
         :on-success="handleSuccess"
         :before-upload="beforeResumeUpload"
         :limit=1
+        :on-change="handleChange"
         :on-exceed="handleExceed"
-        :on-preview="handlePreview"> 
+        :on-preview="handlePreview"
+        :on-error = "handleError"
+        :show-file-list="false"> 
             <i class="el-icon-upload"></i>
             <el-icon class="el-input__icon">
                     <Upload />
@@ -17,19 +21,13 @@
             <div class="el-upload__tip" slot="tip">只能上传jpg/png、pdf、doc文件，且不超过500kb</div>
     </el-upload>
 
-
-    <div></div>
-
-
     <!-- TODO -->
-    <embed
-    v-if="embedSrc"
-    type="video/webm"
-    :src="embedSrc"
-    width="100%"
-    style="max-height: 50rem; min-height: 20rem"
-    />
-    <CVForm :cv = "form.resume" :showButton = "true"></CVForm>
+
+   
+        <CVForm :cv = "form.resume" :showButton = "true"></CVForm>
+    </div>
+   
+  
 </template>
 
 <script setup>
@@ -38,7 +36,7 @@ import { ref, reactive} from 'vue'
 import {toast} from '~/composables/util.js'
 import { useRouter } from 'vue-router'
 import CVForm from '~/components/cv/CVForm.vue'
-
+const loading = ref(false)
 /**
  * 定义整个表单的值
  */
@@ -58,18 +56,21 @@ let form = reactive({
         "gender": null,
         "avatarUrl": null,
         "workingYears": null,
-        "uploadUser": "jzwgyhbxke",
         "selfEvaluation": null,
         "politicalAppearance": null,
         "ethnicity": null,
-        "createAt": "",
-        "updateAt": ""
+
     }
 })
 
 
 function handleSuccess(response, file, fileList){
-    form.resume = response.data
+    form.resume = response
+    form.resume.fileName = file.name
+}
+
+const handleChange = (ffile, files)=>{
+    loading.value = !loading.value
 }
 
 /**
@@ -81,7 +82,7 @@ function beforeResumeUpload(file){
     const isPhoto = (file.type === 'image/jpeg' || file.type === 'image/png');
     const isPdf = (file.type === 'application/pdf')
     var fileExtension = file.name.substring(file.name.lastIndexOf('.') + 1);
-    const isWord = (fileExtension == 'doc' || fileExtension == 'docx')
+    const isWord = (fileExtension == 'doc' || fileExtension == 'docx' || fileExtension == 'txt')
     const isLt2M = file.size / 1024 / 1024 < 2;
     const isRightType = (isPdf || isPhoto || isWord)
     
@@ -92,6 +93,9 @@ function beforeResumeUpload(file){
         toast('上传简历文件大小不能超过 2MB!')
     }
     return isRightType && isLt2M;
+}
+const handleError = (error, file, files)=>{
+    toast("上传文件失败！" + error, 'error')
 }
 
 

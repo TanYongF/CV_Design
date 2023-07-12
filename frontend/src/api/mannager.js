@@ -10,14 +10,13 @@ export function login(username, password) {
     })
 }
 
+//以下是用户相关接口
 export function getUserById(user_id) {
     return axios.get("/user/" + user_id, {})
 }
-
 export function getInfoByToken() {
     return axios.get("/getInfo", {})
 }
-
 export function logout() {
     return axios.get("/user/logout", {
         params: {
@@ -25,13 +24,15 @@ export function logout() {
         }
     })
 }
-
 export function register(user) {
     return axios.post('/user/register', {
         username: user.username,
         password: user.password,
         is_admin: user.isAdmin == true ? 1 : 0
     })
+}
+export function updateUserInfo(user){
+    return 
 }
 
 
@@ -45,14 +46,18 @@ export function deleteCV(cvId) {
     return axios.delete('/cv/' + cvId, {})
 }
 
-export function getCvs() {
+export function getCvs(pageNo, pageSize) {
     return axios.get('/cv', {
         params: {
-            page_no: 1,
-            page_size: 6
+            page_no: pageNo,
+            page_size: pageSize
         }
     })
 }
+export function getCvById(cvId){
+    return axios.get('/cv/' + cvId);
+} 
+
 
 //以下是关于工作相关的接口
 export function getJobs() {
@@ -82,4 +87,11 @@ export function proposeJob(jobId, pageSize, pageNo) {
             page_size: pageSize
         }
     })
+}
+
+
+//以下是标签相关接口
+export function getTagByResumeId(resumeId){
+
+    return axios.get('/cv/tag/'+ resumeId);
 }

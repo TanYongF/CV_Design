@@ -11,7 +11,8 @@ import AddCV from '~/pages/cv/addCV.vue'
 import jobDetail from '~/pages/job/jobDetail.vue'
 import Jobs from  "~/pages/job/jobs.vue"
 import myJobs from  "~/pages/job/myJobs.vue"
-import jobCandidates from "~/pages/job/jobCandidates .vue"
+import jobCandidates from "~/pages/job/jobCandidates.vue"
+import tags from '~/pages/tag/tags.vue'
 const routes = [{
     path: "/",
     component: Admin,
@@ -63,6 +64,12 @@ const routes = [{
         component: jobCandidates,
         meta:{
             title:"推荐人选"
+        }
+    }, {
+        path:"/tag",
+        component: tags,
+        meta:{
+            title:"标签管理"
         }
     }]
 

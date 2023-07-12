@@ -1,0 +1,110 @@
+ABAP
+Ada
+ALGOL
+APL
+Assembly
+AWK
+BASIC
+C语言
+C++
+C#
+COBOL
+CoffeeScript
+D语言
+Dart
+Delphi
+Elixir
+Elm
+Erlang
+F#
+Fortran
+Go
+Groovy
+Haskell
+HTML/CSS
+Java
+JavaScript
+Julia
+Kotlin
+Lisp
+Lua
+MATLAB
+Objective-C
+Pascal
+Perl
+PHP
+PowerShell
+Prolog
+Python
+R语言
+Ruby
+Rust
+Scala
+Scheme
+Shell scripting
+Smalltalk
+SQL
+Swift
+TypeScript
+VB.NET
+Visual Basic
+WebAssembly
+Django
+Ruby on Rails
+Flask
+Laravel
+Spring Framework
+ASP.NET
+Express.js
+Vue.js
+React
+Angular
+Ember.js
+Node.js
+React Native
+Flutter
+Xamarin
+Ionic
+TensorFlow
+PyTorch
+scikit-learn
+Keras
+Apache Spark
+Theano
+MySQL
+PostgreSQL
+Oracle Database
+MongoDB
+Redis
+Cassandra
+Apache Hadoop
+Apache Kafka
+OpenSSL
+Nmap
+Snort
+Metasploit
+Wireshark
+OpenSSH
+Linux
+Windows
+Docker
+Kubernetes
+VMware
+Amazon Web Services (AWS)
+Microsoft Azure
+Google Cloud Platform (GCP)
+OpenStack
+Apache Mesos
+Bootstrap
+Bulma
+Foundation
+Semantic UI
+Tailwind CSS
+Unity
+Unreal Engine
+Godot Engine
+Cocos2d-x
+Arduino
+Raspberry Pi
+Node-RED
+Home Assistant

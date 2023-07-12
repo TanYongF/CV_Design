@@ -1,22 +1,30 @@
 <template>
   <el-card class="box-card" :body-style="{ padding: '0px' }" shadow="hover">
-    <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image"
-      @click="dialogVisible = true" />
+    <div class="mt-0">
+      <img src="https://kauizhaotan.oss-accelerate.aliyuncs.com/img/cv-gf96be2e73_1280.png?x-oss-process=style/water"
+        class="image" @click="dialogVisible = true" />
+
+    </div>
+
     <div style="padding: 12px" class="flex">
       <span class="font-bold mr-2">{{ cv.fileName }} </span>
       <span class="ml-auto"><el-tag>{{ cv.intention ? cv.intention : '未填写' }}</el-tag>
       </span>
 
     </div>
+ 
+    <div class="card-bottom flex">
+      <span>创建于 {{ transferDatestamp(cv.createAt) }}</span>
 
-    <div class="bottom flex justify-center items-center">
-      <span class="ml-3">创建于 {{ transferDatestamp(cv.createAt) }}</span>
-      <el-button class="ml-auto" type="danger" size="small" @click="onDelete">删除简历</el-button>
-      <el-button class="ml-auto" type="primary" size="small" @click="dialogVisible = true">查看详情</el-button>
+      <el-button-group class="ml-auto">
+        <el-button type="danger" @click="onDelete">删除简历</el-button>
+        <el-button type="primary" @click="dialogVisible = true">查看详情</el-button>
+
+      </el-button-group>
     </div>
 
     <template #footer>
-
+     
     </template>
   </el-card>
 
@@ -31,11 +39,15 @@
       <CVForm :cv=newCV.cv :showButton="false"></CVForm>
     </div>
 
-
+  
 
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="dialogVisible = false" type="danger" :disabled="btnDisable">取消更新</el-button>
+        <el-button @click="dialogVisible = false" type="danger" :disabled="btnDisable">取消更新
+          <el-icon class="el-icon--right">
+            <Delete />
+          </el-icon>
+        </el-button>
         <el-button type="primary" @click="onSubmit" :disabled="btnDisable">
           确认更新 <el-icon class="el-icon--right">
             <Upload />
@@ -46,51 +58,6 @@
   </el-dialog>
 </template>
   
-<style>
-@import '~/assets/fonts/fonts.css';
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-
-.item {
-  margin-bottom: 1px;
-}
-
-.box-card {
-  width: 400px;
-
-}
-
-.dialog-bg {
-  background: #edc0bf;
-  background: linear-gradient(90deg, #edc0bf 0, #c4caef 58%);
-}
-
-.form-bg {
-  /* other styles */
-  background: rgba(255, 255, 255, .7);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-}
-
-.image {
-  width: 100%;
-  display: block;
-}
-
-.el-dialog {
-  @apply rounded-2xl;
-}
-
-.bottom {
-  @apply my-1 mx-3;
-}
-</style>
-
 <script setup>
 import { ref, reactive } from 'vue'
 import { transferDatestamp, toast } from '~/composables/util'
@@ -148,12 +115,56 @@ const onSubmit = () => {
       // router.push("/cvs")
     })
     .finally(() => {
-
       btnDisable.value = false
     })
 
 }
-
-
-
 </script>
+
+<style scoped>
+.box-card {
+  @apply mb-5 mx-auto rounded-3xl pb-0.5em shadow-2xl;
+}
+
+.image {
+  width: 100%;
+  display: block;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-bottom {
+  @apply my-1 mx-3;
+}
+
+.item {
+  margin-bottom: 1px;
+}
+</style>
+
+
+<style>
+@import '~/assets/fonts/fonts.css';
+
+
+
+.dialog-bg {
+  background: #edc0bf;
+  background: linear-gradient(90deg, #edc0bf 0, #c4caef 58%);
+}
+
+.form-bg {
+  /* other styles */
+  background: rgba(255, 255, 255, .7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.el-dialog {
+  @apply rounded-2xl;
+}
+</style>

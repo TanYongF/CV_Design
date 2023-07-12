@@ -12,7 +12,7 @@
                 <el-input placeholder="任意最低期望薪酬" v-model="searchCondition.minSalary"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" @click="handlePageChange(1)">搜索</el-button>
+                <el-button :icon="Search" type="primary" @click="handlePageChange(1)">搜索</el-button>
 
             </el-form-item>
         </el-form>
@@ -28,7 +28,7 @@
             <el-table-column label="操作">
                 <template #default="scope">
                     <el-button type="primary" @click="handleDetail(scope.row.id)">详情</el-button>
-                
+
                 </template>
 
             </el-table-column>
@@ -38,30 +38,6 @@
             @next-click="handlePageChange">
         </el-pagination>
     </div>
-
-    <!-- 更改表单开始 -->
-    <el-dialog v-model="dialogVisible" title="岗位查看" width="45%" :before-close="handleClose" @open="onOpen"
-        class="dialog-bg">
-        <template #header>
-            <div style="font-family: 'JMH'; padding-bottom: 0px;" class="text-2xl">岗位查看</div>
-
-        </template>
-        <div class="rounded-3xl p-4 form-bg mx-4">
-            <!-- <CVForm :cv=newCV.cv :showButton="false"></CVForm> -->
-            <jobForm></jobForm>
-        </div>
-
-        <template #footer>
-            <span class="dialog-footer">
-                <el-button @click="dialogVisible = false" type="danger" :disabled="btnDisable">取消更新</el-button>
-                <el-button type="primary" @click="onSubmit" :disabled="btnDisable">
-                    确认更新 <el-icon class="el-icon--right">
-                        <Upload />
-                    </el-icon>
-                </el-button>
-            </span>
-        </template>
-    </el-dialog>
 </template>
 
 
@@ -78,6 +54,7 @@
 import { ref, reactive, watch, onMounted, onBeforeUnmount } from 'vue'
 import { toast, transferDatestamp } from '~/composables/util.js'
 import { useRouter } from 'vue-router'
+import { Search} from '@element-plus/icons-vue'
 import jobForm from '~/components/job/jobForm.vue'
 import { getJobs, searchJob } from '~/api/mannager'
 var jobScheme = {
@@ -101,7 +78,6 @@ const searchCondition = reactive({
     "companyName": '',
     "positionName": '',
 })
-const dialogVisible = ref(false)
 const router = useRouter()
 
 

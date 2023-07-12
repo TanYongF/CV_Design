@@ -77,7 +77,7 @@ const refresh = ()=>{
 
 </script>
 <style scoped>
-@import '~/assets/fonts/fonts.css';
+
 .f-header {
     @apply flex items-center z-1 bg-indigo-600 text-light-50 fixed top-0 right-0 left-0;
     height: 64px;

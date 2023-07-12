@@ -13,16 +13,16 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class Job {
 
+    /**
+     * 其他信息
+     */
+    public String remark;
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private String id;
     /**
      * 最低薪酬
      */
     private Integer minSalary;
-    /**
-     * 其他信息
-     */
-    public String remark;
     /**
      * 上传企业
      */

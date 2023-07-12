@@ -9,6 +9,9 @@ import fun.tans.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -63,11 +66,19 @@ public class JobController {
      * @return
      */
     @GetMapping("/propose/{jobId}")
-    public Result<Page<Resume>> recommend(@RequestParam("page_no") Integer pageNo,
-                                          @RequestParam("page_size") Integer pageSize,
-                                          @PathVariable("jobId") String jobId) {
-        return Result.success(jobService.recommend(jobId, new Page<>(pageNo, pageSize)));
+    public Result<ArrayList<HashMap<String, Object>>> recommend(@RequestParam("page_no") Integer pageNo,
+                                                                @RequestParam("page_size") Integer pageSize,
+                                                                @PathVariable("jobId") String jobId) {
+        HashMap<Resume, Double> ret = jobService.recommend(jobId, new Page<>(pageNo, pageSize));
+        ArrayList<Map.Entry<Resume, Double>> entries = new ArrayList<>(ret.entrySet());
+        entries.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+        ArrayList<HashMap<String, Object>> list = new ArrayList<>();
+        for(Map.Entry entry : entries){
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("key", entry.getKey());
+            map.put("value", entry.getValue());
+            list.add(map);
+        }
+        return Result.success(list);
     }
-
-
 }

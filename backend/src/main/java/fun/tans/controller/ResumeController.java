@@ -4,13 +4,19 @@ package fun.tans.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import fun.tans.pojo.DTO.ResumeTag;
 import fun.tans.pojo.Resume;
+import fun.tans.pojo.Tag;
 import fun.tans.pojo.User;
 import fun.tans.service.ResumeService;
+import fun.tans.service.TagService;
 import fun.tans.tools.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -19,6 +25,9 @@ public class ResumeController {
 
     @Autowired
     private ResumeService resumeService;
+
+    @Autowired
+    private TagService tagService;
 
 
     /**
@@ -76,8 +85,12 @@ public class ResumeController {
                                    @RequestBody Resume resume,
                                    User user) {
         Resume cv = resumeService.store(file, user, resume);
-        return Result.success(resume);
+        // analysis the resume's tag
+        tagService.analysis(cv);
+        return Result.success(cv);
     }
+
+
 
     /**
      * 删除某个简历
@@ -113,4 +126,30 @@ public class ResumeController {
     public Result<Boolean> analysisAllCVs() {
         return Result.success(resumeService.analysisAll());
     }
+
+    @PostMapping("/tag")
+    public Result<Boolean> addTag(@RequestBody ResumeTag resumeTag) {
+        return Result.success(resumeTag.insert());
+    }
+
+    @DeleteMapping("/tag")
+    public Result<Boolean> removeTag(@RequestBody ResumeTag resumeTag) {
+        QueryWrapper<ResumeTag> wrapper = new QueryWrapper<>();
+        wrapper.eq("resume_id", resumeTag.getResumeId())
+                .eq("tag_id", resumeTag.getTagId());
+        return Result.success(resumeTag.delete(wrapper));
+    }
+
+    @GetMapping("/tag/{resumeId}")
+    public Result<List<Tag>> getTags(@PathVariable("resumeId") String resumeId) {
+        QueryWrapper<ResumeTag> wrapper = new QueryWrapper<>();
+        wrapper.eq("resume_id", resumeId);
+        ResumeTag resumeTag = new ResumeTag();
+        List<ResumeTag> resumeTags = resumeTag.selectList(wrapper);
+        List<String> tagIds = resumeTags.stream().map(ResumeTag::getTagId).collect(Collectors.toList());
+        if(tagIds.isEmpty()) return Result.success(null);
+        QueryWrapper<Tag> wrapper1 = new QueryWrapper<Tag>().in("id", tagIds);
+        return Result.success(tagService.list(wrapper1));
+    }
+
 }

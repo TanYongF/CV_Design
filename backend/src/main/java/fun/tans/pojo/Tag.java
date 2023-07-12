@@ -12,8 +12,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class Tag {
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    private Integer id;
+    private String id;
 
-    private String info;
+    private String name;
 
 }
