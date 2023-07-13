@@ -96,18 +96,18 @@ public class UserController {
      * @return 用户
      */
     @PutMapping("")
-    public Result<User> update(@RequestParam("username") String username,
+    public Result<User> update(User user,
                                @RequestParam(value = "nickname", required = false) String nickname,
                                @RequestParam(value = "gender", required = false) Boolean gender,
                                @RequestParam(value = "phone", required = false) String phone) {
-        User user = new User();
-        user.setUsername(username);
         user.setNickname(nickname);
         user.setGender(gender);
         user.setPhone(phone);
         userService.update(user);
         return Result.success(user);
     }
+
+
 
 
     @PostMapping("/avatar")

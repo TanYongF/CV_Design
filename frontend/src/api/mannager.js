@@ -32,7 +32,13 @@ export function register(user) {
     })
 }
 export function updateUserInfo(user){
-    return 
+    return axios.put('/user',{}, {
+        params:{
+            "nickname":user.nickname,
+            "gender": user.gender,
+            "phone": user.phone
+        }
+    }) 
 }
 
 

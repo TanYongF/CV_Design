@@ -5,6 +5,8 @@ import fun.tans.pojo.Resume;
 import fun.tans.pojo.User;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
+
 public interface ResumeService extends IService<Resume> {
     Resume store(MultipartFile file, User user);
 
@@ -12,5 +14,5 @@ public interface ResumeService extends IService<Resume> {
 
     Boolean analysis(String resumeId);
 
-    Boolean analysisAll();
+    HashMap<String, Object> analysisAll();
 }

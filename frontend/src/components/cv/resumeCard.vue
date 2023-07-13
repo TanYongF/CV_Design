@@ -123,9 +123,11 @@ const onSubmit = () => {
 
 <style scoped>
 .box-card {
-  @apply mb-5 mx-auto rounded-3xl pb-0.5em shadow-2xl;
+  @apply mb-5 mx-auto rounded-3xl pb-0.5em ;
 }
-
+.box-card:hover {
+  @apply mb-5 mx-auto rounded-3xl pb-0.5em shadow-2xl shadow-blue-700 ;
+}
 .image {
   width: 100%;
   display: block;

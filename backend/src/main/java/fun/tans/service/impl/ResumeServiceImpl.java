@@ -1,9 +1,15 @@
 package fun.tans.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.aliyun.oss.OSS;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import fun.tans.conf.AliyunConfig;
+import fun.tans.mapper.JobMapper;
 import fun.tans.mapper.ResumeMapper;
+import fun.tans.mapper.TagMapper;
+import fun.tans.mapper.UserMapper;
 import fun.tans.pojo.Resume;
 import fun.tans.pojo.User;
 import fun.tans.service.ResumeService;
@@ -14,7 +20,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> implements ResumeService {
@@ -30,6 +40,15 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
 
     @Autowired
     private TrieNode tagSearchTrie;
+
+    @Autowired
+    private TagMapper tagMapper;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private JobMapper jobMapper;
 
     @Override
     public Resume store(MultipartFile file, User user) {
@@ -61,8 +80,28 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
 
     //TODO
     @Override
-    public Boolean analysisAll() {
-        return true;
+    public HashMap<String, Object> analysisAll() {
+        HashMap<String, Object> mp = new HashMap<>();
+        LambdaQueryWrapper<Resume> queryMapper = new LambdaQueryWrapper<>();
+        Long resumeCount = resumeMapper.selectCount(new QueryWrapper<>());
+        Long userCount = userMapper.selectCount(new QueryWrapper<>());
+        Long tagCount = tagMapper.selectCount(new QueryWrapper<>());
+        Long jobCount = jobMapper.selectCount(new QueryWrapper<>());
+        // the total resume nums
+        mp.put("resumeCount", resumeCount);
+        mp.put("tagCount", tagCount);
+        mp.put("userCount", userCount);
+        mp.put("jobCount", jobCount);
+        Map<Object, Long> schools = format(resumeMapper.countByColumnKey("school"), "school", "count");
+        Map<Object, Long> genders = format(resumeMapper.countByColumnKey("gender"), "gender", "count");
+        Map<Object, Long> degrees = format(resumeMapper.countByColumnKey("highest_degree"), "highest_degree", "count");
+        Map<Object, Long> ages =  format(resumeMapper.countByColumnKey("age"), "age", "count");
+        mp.put("schools", schools);
+        mp.put("genders", genders);
+        mp.put("degrees", degrees);
+        mp.put("ages", ages);
+
+        return mp;
     }
 
 
@@ -86,5 +125,18 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    public Map<Object, Long> format(List<Map<String, Long>> list, String keyName, String valueName){
+        HashMap<Object, Long> mp = new HashMap<>();
+        if(CollectionUtil.isNotEmpty(list)) {
+            for(Map item : list){
+
+                mp.put(item.get(keyName), (Long) item.get(valueName));
+            }
+
+        }
+        return mp;
     }
 }

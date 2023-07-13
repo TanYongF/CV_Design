@@ -16,6 +16,9 @@
         <el-form-item label="姓名" required prop="name">
             <el-input v-model="cv.name" placeholder="真实姓名"></el-input>
         </el-form-item>
+        <el-form-item label="年龄" required prop="age">
+            <el-input v-model.number="cv.age" placeholder="年龄"></el-input>
+        </el-form-item>
         <el-form-item label="基本信息">
             <el-col :span="6">
                 <el-form-item class="inline-form" prop="gender" required>
@@ -77,7 +80,7 @@
         <el-form-item label="自我介绍" >
             <el-input v-model="cv.selfEvaluation" type="textarea" placeholder="个人简介，包括兴趣等等"></el-input>
         </el-form-item>
-        <el-form-item label="标签">
+        <el-form-item label="标签" :class="{ hidden: showButton }">
             <el-tag v-for="tag in cv.tags" :key="tag.id" class="mx-1" effect="dark">
                 {{ tag.name }}
             </el-tag>
@@ -179,11 +182,18 @@ const rules = {
         { required: true, trigger: 'blur' }
     ],
     email: [
-        { required: true, trigger: 'blur' }
+        { type: 'email' ,required: true, trigger: 'blur' }
+    ],
+    age:[
+        { type: 'number' ,required: true, trigger: 'blur', message:"请输入数字！" },
+        { min: '18', max:'65', trigger: 'blur', message: '确保年龄在18-65周岁内！'}
+        
     ],
     tel: [
-        { required: true, trigger: 'blur' }
+        { required: true, trigger: 'blur', message: '请输入电话号码' },
+        { len : 11, trigger: 'blur', message: '电话号码格式不正确！'}
     ],
+
 };
 
 /**

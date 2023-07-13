@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -117,15 +118,7 @@ public class ResumeController {
     }
 
 
-    /**
-     * 系统所有简历分析结果
-     *
-     * @return 所有建立的统计分析结果
-     */
-    @GetMapping("/analysis/all")
-    public Result<Boolean> analysisAllCVs() {
-        return Result.success(resumeService.analysisAll());
-    }
+
 
     @PostMapping("/tag")
     public Result<Boolean> addTag(@RequestBody ResumeTag resumeTag) {
@@ -151,5 +144,7 @@ public class ResumeController {
         QueryWrapper<Tag> wrapper1 = new QueryWrapper<Tag>().in("id", tagIds);
         return Result.success(tagService.list(wrapper1));
     }
+
+
 
 }
