@@ -42,9 +42,12 @@ public class ResumeController {
     @GetMapping("")
     public Result<Page<Resume>> listPageFiltering(@RequestParam("page_no") Integer pageNo,
                                                   @RequestParam("page_size") Integer pageSize,
-                                                  @RequestBody(required = false) Resume resume) {
+                                                  @RequestBody(required = false) Resume resume,
+                                                  User user){
         Page<Resume> page = new Page<>(pageNo, pageSize);
         QueryWrapper<Resume> queryWrapper = new QueryWrapper<>();
+        //如果是普通用户， 那么获取她自己的简历
+        if(!user.getRole()) queryWrapper.eq("upload_user", user.getUsername());
         if (resume != null) {
             if (StringUtils.isNotEmpty(resume.getName())) {
                 queryWrapper.like("name", resume.getName());
@@ -53,6 +56,8 @@ public class ResumeController {
                 queryWrapper.like("intention", resume.getIntention());
             }
         }
+        //根据时间降序排序
+        queryWrapper.orderByDesc("update_at");
         return Result.success(resumeService.page(page, queryWrapper));
     }
 
@@ -90,7 +95,6 @@ public class ResumeController {
         tagService.analysis(cv);
         return Result.success(cv);
     }
-
 
 
     /**

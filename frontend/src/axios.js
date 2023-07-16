@@ -9,7 +9,7 @@ const service = axios.create({
     baseURL: "api",
     timeout: 1000,
 })
-
+// axios.defaults.withCredentials = true; //true允许跨域
 // 添加请求拦截器
 service.interceptors.request.use(function (config) {
 

@@ -3,14 +3,14 @@
         <div class="detail-title ">
             基本信息
         </div>
-        <el-card shadow="never"> 
+        <el-card shadow="never">
             <el-row :gutter="15">
                 <!-- card body -->
 
                 <el-col :lg="3" :md="24" style="margin-bottom:0px!important">
                     <div class="flex justify-center items-center"><el-avatar :size="100" :src=avatarUrl></el-avatar></div>
                 </el-col>
-                <el-col :lg="20" :md="24"  style="margin-bottom:0px!important">
+                <el-col :lg="20" :md="24" style="margin-bottom:0px!important">
                     <el-descriptions>
                         <el-descriptions-item label="用户名">{{ $store.state.user.username }}</el-descriptions-item>
                         <el-descriptions-item label="手机号"> {{ $store.state.user.phone }}</el-descriptions-item>
@@ -40,71 +40,71 @@
             简历统计
         </div>
         <el-row :gutter="20">
-            <el-col :span="6" :offset="0">
-                <el-card  shadow="never">
+            <el-col :lg="6" :md="24"  :sm="24" :offset="0">
+                <el-card shadow="never">
                     <template #header>
                         <div class="flex">
                             <span> 简历总数 </span>
                             <span class="ml-auto">
-                                <el-tag  size="normal"  effect="light" >全部</el-tag>
+                                <el-tag size="normal" effect="light">全部</el-tag>
                             </span>
                         </div>
                     </template>
-                    <div  class="card-count">
-                        <CountTo :value="statistics.value.resumeCount ">
+                    <div class="card-count">
+                        <CountTo :value="statistics.value.resumeCount">
                         </CountTo>
-                      
+
                     </div>
                     <!-- card body -->
                 </el-card>
 
             </el-col>
-            <el-col :span="6" :offset="0">
+            <el-col :lg="6" :md="24"  :sm="24" :offset="0">
                 <el-card shadow="never">
                     <template #header>
                         <div class="flex">
                             <span> 用户总数 </span>
                             <span class="ml-auto">
-                                <el-tag type="danger" size="normal"  effect="light" >全部</el-tag>
+                                <el-tag type="danger" size="normal" effect="light">全部</el-tag>
                             </span>
                         </div>
                     </template>
-                    <div  class="card-count">
-                        <CountTo :value="statistics.value.userCount "></CountTo>
-                      
+                    <div class="card-count">
+                        <CountTo :value="statistics.value.userCount"></CountTo>
+
                     </div>
-                    
+
                 </el-card>
             </el-col>
-            <el-col :span="6" :offset="0">
+            <el-col :lg="6" :md="24"  :sm="24" :offset="0">
                 <el-card shadow="never">
                     <template #header>
                         <div class="flex">
                             <span> 标签总数 </span>
                             <span class="ml-auto">
-                                <el-tag type="warning" size="normal"  effect="light" >全部</el-tag>
+                                <el-tag type="warning" size="normal" effect="light">全部</el-tag>
                             </span>
                         </div>
                     </template>
-                    <div  class="card-count">
+                    <div class="card-count">
                         <CountTo :value="statistics.value.tagCount"></CountTo>
- 
+
                     </div>
-                   
+
                 </el-card>
             </el-col>
-            <el-col :span="6" :offset="0">
+            <el-col :lg="6" :md="24"  :sm="24" :offset="0">
                 <el-card shadow="never">
                     <template #header>
                         <div class="flex">
                             <span> 岗位总数 </span>
                             <span class="ml-auto">
-                                <el-tag type="success" size="normal"  effect="light" >全部</el-tag>
+                                <el-tag type="success" size="normal" effect="light">全部</el-tag>
                             </span>
                         </div>
                     </template>
-                    <div  class="card-count">
-                        <CountTo :value=" statistics.value.jobCount"></CountTo>
+                    <div class="card-count">
+                        <CountTo :value="statistics.value.jobCount"></CountTo>
                     </div>
 
                 </el-card>
@@ -189,7 +189,6 @@ onMounted(() => {
     //加载核心数据
     getStatistics().then((res) => {
         statistics.value = res.data
-        console.log(statistics)
         flag.value = true
 
     })
@@ -211,17 +210,16 @@ onMounted(() => {
     @apply mb-5;
 }
 
-.card-count{
-    @apply flex  justify-center items-center h-90px text-6xl;
+.card-count {
+    @apply flex justify-center items-center h-90px text-6xl;
     font-family: "DIN"
 }
 
-.el-card__header{
+.el-card__header {
     @apply border-indigo-500;
 }
-.el-card{
+
+.el-card {
     @apply border-0;
 }
-
-
 </style>

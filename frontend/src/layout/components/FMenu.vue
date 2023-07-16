@@ -13,7 +13,7 @@
                     <span>简历管理</span>
                 </template>
                 <el-menu-item index="/cvs">所有简历</el-menu-item>
-                <el-menu-item index="/cv/add"  v-if="$store.state.user.role == 0">上传简历</el-menu-item>
+                <el-menu-item index="/cv/add" >上传简历</el-menu-item>
             </el-sub-menu>
             <el-sub-menu index="3">
                 <template #title>
@@ -27,10 +27,6 @@
             <el-menu-item index="/peoples"  v-if="$store.state.user.role == 1" class="hidden">
                 <el-icon><Avatar /></el-icon>
                 <span>人才匹配</span>
-            </el-menu-item>
-            <el-menu-item index="/tag"  v-if="$store.state.user.role == 1">
-                <el-icon><CollectionTag /></el-icon>
-                <span>标签管理</span>
             </el-menu-item>
         </el-menu>
     </div>

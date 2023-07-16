@@ -27,7 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //注册相应的鉴权策略拦截器
-        registry.addInterceptor(authInterceptor).addPathPatterns("/user/**");
+        registry.addInterceptor(authInterceptor).addPathPatterns("/user/**").excludePathPatterns("/user/avatar");
     }
 
     @Override

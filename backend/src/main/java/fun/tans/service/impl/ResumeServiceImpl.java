@@ -96,6 +96,14 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
         Map<Object, Long> genders = format(resumeMapper.countByColumnKey("gender"), "gender", "count");
         Map<Object, Long> degrees = format(resumeMapper.countByColumnKey("highest_degree"), "highest_degree", "count");
         Map<Object, Long> ages =  format(resumeMapper.countByColumnKey("age"), "age", "count");
+        if(genders.containsKey(Boolean.TRUE)) {
+            genders.put('男', genders.get(Boolean.TRUE));
+            genders.remove(Boolean.TRUE);
+        }
+        if(genders.containsKey(Boolean.FALSE)){
+            genders.put('女', genders.get(Boolean.FALSE));
+            genders.remove(Boolean.FALSE);
+        }
         mp.put("schools", schools);
         mp.put("genders", genders);
         mp.put("degrees", degrees);
@@ -132,7 +140,6 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
         HashMap<Object, Long> mp = new HashMap<>();
         if(CollectionUtil.isNotEmpty(list)) {
             for(Map item : list){
-
                 mp.put(item.get(keyName), (Long) item.get(valueName));
             }
 

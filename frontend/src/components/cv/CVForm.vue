@@ -2,7 +2,7 @@
     <el-form :model="cv" :disabled="isDisabled" labe="right" label-width="auto" size="large" class="mx-auto" :rules="rules"
         style="width:95%" ref="formRef">
         <div class="flex justify-center items-center">
-            <el-upload class="avatar-uploader" action="/api/user/avatar" :disabled="isDisabled" :show-file-list="false"
+            <el-upload class="avatar-uploader" action= "api/user/avatar" :disabled="isDisabled" :show-file-list="false"
                 :on-success="handleAvatarSuccess" :before-upload="beforeAvatarUpload" :on-error="handleAvatarError">
                 <img v-if="cv.avatarUrl" :src="cv.avatarUrl" class="avatar" />
                 <el-icon v-else class="avatar-uploader-icon">
@@ -186,8 +186,7 @@ const rules = {
     ],
     age:[
         { type: 'number' ,required: true, trigger: 'blur', message:"请输入数字！" },
-        { min: '18', max:'65', trigger: 'blur', message: '确保年龄在18-65周岁内！'}
-        
+
     ],
     tel: [
         { required: true, trigger: 'blur', message: '请输入电话号码' },

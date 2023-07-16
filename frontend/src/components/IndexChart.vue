@@ -27,9 +27,6 @@ const current = ref("pie")
 const options = [{
     text: "扇形图",
     value: "pie"
-},  {
-    text: "柱状图",
-    value: "bar"
 }]
 
 

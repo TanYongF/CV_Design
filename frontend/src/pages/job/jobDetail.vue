@@ -26,11 +26,19 @@
             </el-col>
             <el-col :span="7" class="my-col">
                 <el-card>
-                    <div class="detail-title">相关职位</div>
-                    <ul>
-                        <li>后端开发工程师</li>
-                    </ul>
-                </el-card>
+                    <div class="detail-title">全部职位</div>
+                        <el-tag type="success" size="large" class="mx-2 my-2">后端开发工程师</el-tag>
+                        <el-tag type="warning" size="large" class="mx-2 my-2">Java开发工程师</el-tag>
+                        <el-tag type="danger" size="large" class="mx-2 my-2">PHP开发工程师</el-tag>
+                        <el-tag type="" size="large" class="mx-2 my-2">文员</el-tag>
+                        <el-tag type="success" size="large" class="mx-2 my-2">销售人员</el-tag>
+                        <el-tag type="" size="large" class="mx-2 my-2">项目主管</el-tag>
+                        <el-tag type="warning"  size="large" class="mx-2 my-2">市场营销</el-tag>
+                        <el-tag type="success" size="large" class="mx-2 my-2">财务</el-tag>
+                        <el-tag type="danger" size="large" class="mx-2 my-2">平面设计师</el-tag>
+                        <el-tag type="success" size="large" class="mx-2 my-2">风控专员</el-tag>
+                        <el-tag type="" size="large" class="mx-2 my-2">人力资源管理</el-tag>
+                    </el-card>
             </el-col>
 
         </el-row>

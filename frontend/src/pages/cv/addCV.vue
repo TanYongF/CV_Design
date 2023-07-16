@@ -4,7 +4,7 @@
         class="upload-demo"
         drag
         :multiple="false"
-        action="/ai/ai/analysis/"
+        action="ai/ai/analysis"
         :on-success="handleSuccess"
         :before-upload="beforeResumeUpload"
         :limit=1
@@ -88,14 +88,17 @@ function beforeResumeUpload(file){
     
     if (!isRightType) {
         toast('上传简历文件只能是图片、Word或者Pdf格式!', "error")
+        file = null
     }
     if (!isLt2M) {
         toast('上传简历文件大小不能超过 2MB!')
+        file = null
     }
     return isRightType && isLt2M;
 }
 const handleError = (error, file, files)=>{
     toast("上传文件失败！" + error, 'error')
+    file = null
 }
 
 
