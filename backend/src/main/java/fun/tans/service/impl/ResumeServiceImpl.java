@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> implements ResumeService {
@@ -95,12 +94,12 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
         Map<Object, Long> schools = format(resumeMapper.countByColumnKey("school"), "school", "count");
         Map<Object, Long> genders = format(resumeMapper.countByColumnKey("gender"), "gender", "count");
         Map<Object, Long> degrees = format(resumeMapper.countByColumnKey("highest_degree"), "highest_degree", "count");
-        Map<Object, Long> ages =  format(resumeMapper.countByColumnKey("age"), "age", "count");
-        if(genders.containsKey(Boolean.TRUE)) {
+        Map<Object, Long> ages = format(resumeMapper.countByColumnKey("age"), "age", "count");
+        if (genders.containsKey(Boolean.TRUE)) {
             genders.put('男', genders.get(Boolean.TRUE));
             genders.remove(Boolean.TRUE);
         }
-        if(genders.containsKey(Boolean.FALSE)){
+        if (genders.containsKey(Boolean.FALSE)) {
             genders.put('女', genders.get(Boolean.FALSE));
             genders.remove(Boolean.FALSE);
         }
@@ -136,10 +135,10 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
     }
 
 
-    public Map<Object, Long> format(List<Map<String, Long>> list, String keyName, String valueName){
+    public Map<Object, Long> format(List<Map<String, Long>> list, String keyName, String valueName) {
         HashMap<Object, Long> mp = new HashMap<>();
-        if(CollectionUtil.isNotEmpty(list)) {
-            for(Map item : list){
+        if (CollectionUtil.isNotEmpty(list)) {
+            for (Map item : list) {
                 mp.put(item.get(keyName), (Long) item.get(valueName));
             }
 

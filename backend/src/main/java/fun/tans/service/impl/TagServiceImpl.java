@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 @Service
 public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagService {
@@ -31,7 +29,6 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
     private ResumeTagMapper resumeTagMapper;
 
 
-
     @Override
     public void analysis(Resume cv) {
         //delete the former record
@@ -39,13 +36,13 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements TagSe
         //insert the new records
         HashSet<String> words = new HashSet<>();
         String info = cv.getIntention() + " " + cv.getSelfEvaluation();
-        for(int i = 0; i < info.length(); i++){
+        for (int i = 0; i < info.length(); i++) {
             //获取所有匹配的标签
             String word = trieNode.searchWord(info.substring(i));
-            if(StringUtils.hasText(word)) words.add(word);
+            if (StringUtils.hasText(word)) words.add(word);
         }
 
-        for(String word : words){
+        for (String word : words) {
             QueryWrapper<Tag> wrapper = new QueryWrapper<>();
             wrapper.eq("name", word);
             Tag tag = tagMapper.selectOne(wrapper);

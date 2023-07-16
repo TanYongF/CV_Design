@@ -73,7 +73,7 @@ public class JobController {
         ArrayList<Map.Entry<Resume, Double>> entries = new ArrayList<>(ret.entrySet());
         entries.sort(Map.Entry.comparingByValue(Comparator.reverseOrder()));
         ArrayList<HashMap<String, Object>> list = new ArrayList<>();
-        for(Map.Entry entry : entries){
+        for (Map.Entry entry : entries) {
             HashMap<String, Object> map = new HashMap<>();
             map.put("key", entry.getKey());
             map.put("value", entry.getValue());

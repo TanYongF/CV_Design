@@ -4,7 +4,6 @@ package fun.tans.component;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import fun.tans.mapper.TagMapper;
 import fun.tans.pojo.Tag;
-import fun.tans.service.TagService;
 import fun.tans.tools.TrieNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

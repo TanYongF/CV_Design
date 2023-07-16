@@ -108,8 +108,6 @@ public class UserController {
     }
 
 
-
-
     @PostMapping("/avatar")
     public Result<String> uploadAvatar(@RequestParam("file") MultipartFile file) {
         return Result.success(userService.uploadAvatar(file));

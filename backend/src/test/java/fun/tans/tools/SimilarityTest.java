@@ -9,7 +9,7 @@ import org.xm.Similarity;
 public class SimilarityTest {
 
     @Test
-    public void test(){
+    public void test() {
         double result = Similarity.morphoSimilarity("比较喜欢JAVA", "需要喜欢JAVA的同学");
         System.out.println(result);
     }

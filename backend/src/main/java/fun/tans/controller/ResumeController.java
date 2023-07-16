@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,11 +42,11 @@ public class ResumeController {
     public Result<Page<Resume>> listPageFiltering(@RequestParam("page_no") Integer pageNo,
                                                   @RequestParam("page_size") Integer pageSize,
                                                   @RequestBody(required = false) Resume resume,
-                                                  User user){
+                                                  User user) {
         Page<Resume> page = new Page<>(pageNo, pageSize);
         QueryWrapper<Resume> queryWrapper = new QueryWrapper<>();
         //如果是普通用户， 那么获取她自己的简历
-        if(!user.getRole()) queryWrapper.eq("upload_user", user.getUsername());
+        if (!user.getRole()) queryWrapper.eq("upload_user", user.getUsername());
         if (resume != null) {
             if (StringUtils.isNotEmpty(resume.getName())) {
                 queryWrapper.like("name", resume.getName());
@@ -122,8 +121,6 @@ public class ResumeController {
     }
 
 
-
-
     @PostMapping("/tag")
     public Result<Boolean> addTag(@RequestBody ResumeTag resumeTag) {
         return Result.success(resumeTag.insert());
@@ -144,11 +141,10 @@ public class ResumeController {
         ResumeTag resumeTag = new ResumeTag();
         List<ResumeTag> resumeTags = resumeTag.selectList(wrapper);
         List<String> tagIds = resumeTags.stream().map(ResumeTag::getTagId).collect(Collectors.toList());
-        if(tagIds.isEmpty()) return Result.success(null);
+        if (tagIds.isEmpty()) return Result.success(null);
         QueryWrapper<Tag> wrapper1 = new QueryWrapper<Tag>().in("id", tagIds);
         return Result.success(tagService.list(wrapper1));
     }
-
 
 
 }
