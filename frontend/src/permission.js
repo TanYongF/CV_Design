@@ -36,7 +36,7 @@ router.beforeEach(async (to, from, next) => {
     //设置页面标题
     let title = (to.meta.title ? to.meta.title : "") + "-测试平台"
     document.title = title
-    
+
     next()
 });
 

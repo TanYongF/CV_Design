@@ -7,13 +7,13 @@ const cookie = useCookies()
 
 
 //Get Token
-export function getToken(){
+export function getToken() {
     return cookie.get(TokenKey)
 }
 
 
 //Set Token
-export function setToken(value){
+export function setToken(value) {
     return cookie.set(TokenKey, value, {
         maxAge: MaxExpireTime
     })
@@ -22,6 +22,6 @@ export function setToken(value){
 
 
 //remove Token
-export function removeToken(){
+export function removeToken() {
     return cookie.remove(TokenKey)
 }

@@ -4,7 +4,7 @@ import qs from 'qs';
 import {
     getToken
 } from '~/composables/auth'
-import {toast} from '~/composables/util'
+import { toast } from '~/composables/util'
 const service = axios.create({
     baseURL: "api",
     timeout: 1000,
@@ -13,8 +13,8 @@ const service = axios.create({
 // 添加请求拦截器
 service.interceptors.request.use(function (config) {
 
-    if(config.method == "post"){
-        if(config.url == '/user/login' || config.url == '/user/register')config.data = qs.stringify(config.data);
+    if (config.method == "post") {
+        if (config.url == '/user/login' || config.url == '/user/register') config.data = qs.stringify(config.data);
     }
     const token = getToken()
     if (token) config.headers["token"] = token
@@ -30,7 +30,7 @@ service.interceptors.request.use(function (config) {
 service.interceptors.response.use(function (response) {
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
-    if(response.data.code != 0){
+    if (response.data.code != 0) {
         toast(response.data.msg, "warning")
         console.log(response.data)
         return Promise.reject(response)

@@ -7,7 +7,7 @@ import { useStore } from "vuex";
 export function useLogout() {
     const router = useRouter()
     const store = useStore();
-    function handleLogout(){
+    function handleLogout() {
         showModal("是否确定注销登录？").then(() => {
             logout()
                 .finally(() => {
@@ -22,9 +22,9 @@ export function useLogout() {
     }
 }
 
-export function useAbout(){
+export function useAbout() {
     const router = useRouter()
-    const handleAbout = ()=>{
+    const handleAbout = () => {
         router.push("/about")
     }
     return {
@@ -33,13 +33,13 @@ export function useAbout(){
 }
 
 
-export function useCV(){
+export function useCV() {
     const router = useRouter();
-    const handleCV = ()=>{
+    const handleCV = () => {
         router.push("/cvs");
     }
     return {
         handleCV
     }
-    
 }
+

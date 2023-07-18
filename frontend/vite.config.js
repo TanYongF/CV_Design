@@ -20,9 +20,9 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
       "/ai": {
-        target: "http://127.0.0.1:8084",
+        target: "http://tyftyftyf.natapp1.cc",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/ai/, ""),
+        // rewrite: (path) => path.replace(/^\/ai/, ""),
       }
       
     },

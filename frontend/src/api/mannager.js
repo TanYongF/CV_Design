@@ -31,14 +31,14 @@ export function register(user) {
         is_admin: user.isAdmin == true ? 1 : 0
     })
 }
-export function updateUserInfo(user){
-    return axios.put('/user',{}, {
-        params:{
-            "nickname":user.nickname,
+export function updateUserInfo(user) {
+    return axios.put('/user', {}, {
+        params: {
+            "nickname": user.nickname,
             "gender": user.gender,
             "phone": user.phone
         }
-    }) 
+    })
 }
 
 
@@ -60,9 +60,47 @@ export function getCvs(pageNo, pageSize) {
         }
     })
 }
-export function getCvById(cvId){
+export function getCvById(cvId) {
     return axios.get('/cv/' + cvId);
-} 
+}
+
+export function getCvsAndTags(page, pageSize) {
+    return new Promise((resolve, reject) => {
+        getCvs(page, pageSize)
+            .then((res) => {
+                const cvsp = {
+                    records: res.data.records,
+                };
+
+                // Get the resume's tags
+                const requests = cvsp.records.map((record) =>
+                    getTagByResumeId(record.id)
+                );
+
+                Promise.all(requests)
+                    .then((tagResponses) => {
+                        tagResponses.forEach((tagResponse, index) => {
+                            const tags = tagResponse.data == null ? [] : tagResponse.data;
+                            const resume = cvsp.records[index];
+                            tags.push({
+                                id: "0",
+                                name: resume.intention,
+                            });
+                            resume.tags = tags;
+                        });
+
+                        cvsp.totalItems = res.data.total;
+                        resolve(cvsp);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
+}
 
 
 //以下是关于工作相关的接口
@@ -97,7 +135,7 @@ export function proposeJob(jobId, pageSize, pageNo) {
 
 
 //以下是标签相关接口
-export function getTagByResumeId(resumeId){
+export function getTagByResumeId(resumeId) {
 
-    return axios.get('/cv/tag/'+ resumeId);
+    return axios.get('/cv/tag/' + resumeId);
 }
