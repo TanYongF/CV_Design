@@ -264,10 +264,10 @@ const beforeAvatarUpload = (file) => {
   var fileExtension = file.name.substring(file.name.lastIndexOf(".") + 1);
   const isLt2M = file.size / 1024 / 1024 < 2;
   if (!isPhoto) {
-    toast("上传简历文件只能是png、jpg格式!", "error");
+    toast("头像文件只能是png、jpg格式!", "error");
   }
   if (!isLt2M) {
-    toast("上传简历文件大小不能超过 2MB!", "error");
+    toast("头像文件大小不能超过 2MB!", "error");
   }
   return isPhoto && isLt2M;
 };
