@@ -1,4 +1,5 @@
 <template>
+  
   <div
     v-loading.fullscreen.lock="loading"
     element-loading-text="已提交解析队列，正在解析，请稍后...（预计60s解析完成）"
@@ -32,6 +33,7 @@
     </el-upload>
 
     <!-- TODO -->
+    <el-divider />
 
     <CVForm :cv="form.resume" :showButton="true"></CVForm>
   </div>

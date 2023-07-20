@@ -1,6 +1,6 @@
 <template>
   <el-row :gutter="20" justify="center">
-    <el-col :span="19" :offset="0">
+    <el-col :lg="19" :md="24" :offset="0">
       <div class="mb-4">
         <el-page-header
           :icon="ArrowLeft"
@@ -21,7 +21,7 @@
 
   <div>
     <el-row :gutter="20" justify="center">
-      <el-col :span="12" class="my-col">
+      <el-col :lg="12" md="24" class="my-col">
         <el-card class="pl-4" v-loading="loading">
           <template #header>
             <div class="card-header block mt-3">
@@ -43,7 +43,7 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :span="7" class="my-col">
+      <el-col :lg="7" md="24" class="my-col">
         <el-card>
           <div class="detail-title">全部职位</div>
           <el-tag type="success" size="large" class="mx-2 my-2"
