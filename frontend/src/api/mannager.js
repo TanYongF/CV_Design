@@ -63,43 +63,32 @@ export function getCvs(pageNo, pageSize) {
 export function getCvById(cvId) {
     return axios.get('/cv/' + cvId);
 }
-
-export function getCvsAndTags(page, pageSize) {
-    return new Promise((resolve, reject) => {
-        getCvs(page, pageSize)
-            .then((res) => {
-                const cvsp = {
-                    records: res.data.records,
-                };
-
-                // Get the resume's tags
-                const requests = cvsp.records.map((record) =>
-                    getTagByResumeId(record.id)
-                );
-
-                Promise.all(requests)
-                    .then((tagResponses) => {
-                        tagResponses.forEach((tagResponse, index) => {
-                            const tags = tagResponse.data == null ? [] : tagResponse.data;
-                            const resume = cvsp.records[index];
-                            tags.push({
-                                id: "0",
-                                name: resume.intention,
-                            });
-                            resume.tags = tags;
-                        });
-
-                        cvsp.totalItems = res.data.total;
-                        resolve(cvsp);
-                    })
-                    .catch((error) => {
-                        reject(error);
-                    });
-            })
-            .catch((error) => {
-                reject(error);
+export async function getCvsAndTags(page, pageSize) {
+    var cvsp
+    try {
+        const res = await getCvs(page, pageSize);
+        cvsp = {
+            records: res.data.records,
+        };
+        cvsp.totalItems = res.data.total;
+        // Get the resume's tags
+        const requests = cvsp.records.map((record) =>
+            getTagByResumeId(record.id)
+        );
+        const tagResponses = await Promise.all(requests)
+        tagResponses.forEach((tagResponse, index) => {
+            const tags = tagResponse.data == null ? [] : tagResponse.data;
+            const resume = cvsp.records[index];
+            tags.push({
+                id: "0",
+                name: resume.intention,
             });
-    });
+            resume.tags = tags;
+        });
+    } catch (error) {
+        console.log(error);
+    }
+    return Promise.resolve(cvsp)
 }
 
 
